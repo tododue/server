@@ -7,6 +7,7 @@ import * as ejs from "ejs";
 import * as path from "ejs";
 import {addAsync} from "@awaitjs/express";
 import {StaticRoute} from "./routes/staticroute";
+import {Config} from "../config";
 
 
 // Create server
@@ -25,3 +26,9 @@ server.set('views', path.join(__dirname, "../views"));
 
 // Register routes
 StaticRoute.route(server);
+
+// Start server!
+server.listen(Config.APP_PORT, Config.APP_ADDRESS, () => {
+    console.log(`Application listening on ${Config.APP_ADDRESS}:${Config.APP_PORT}`);
+});
+
