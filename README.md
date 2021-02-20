@@ -1,5 +1,5 @@
 <div align="center">
-	<img src="AddLogo" alt="To Do, Due"/>
+	<img src="./app/public/assets/img/logo.svg" alt="To Do, Due"/>
 </div>
 
 # server
@@ -41,4 +41,4 @@ Keeping track of up to five different websites for scheduling work, assignments,
 
 ## Team
 
-| [![Zach Kroesen](https://github.com/GlitchyCzE.png?size=100)](https://github.com/GlitchyCzE) | [![Patrick Mehlbaum](https://github.com/pmehlb.png?size=100)](https://github.com/pmehlb) | [![Christopher Grabda](https://github.com/CGrabda.png?size=100)](https://github.com/CGrabda)
+| [![Zach Kroesen](https://github.com/GlitchyCzE.png?size=100)](https://github.com/GlitchyCzE) | [![Patrick Mehlbaum](https://github.com/pmehlb.png?size=100)](https://github.com/pmehlb) | [![Christopher Grabda](https://github.com/CGrabda.png?size=100)](https://github.com/CGrabda) |
