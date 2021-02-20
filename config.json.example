@@ -1,8 +1,8 @@
 {
     "DEBUG_MODE": false,
 
-    "ADDRESS": "0.0.0.0",
-    "PORT": 3000,
+    "APP_ADDRESS": "0.0.0.0",
+    "APP_PORT": 3000,
 
     "DB_HOST": "127.0.0.1",
     "DB_PORT": "3306",

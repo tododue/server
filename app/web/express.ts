@@ -33,4 +33,3 @@ APIRoute.route(server);
 server.listen(Config.APP_PORT, Config.APP_ADDRESS, () => {
     console.log(`Application listening on ${Config.APP_ADDRESS}:${Config.APP_PORT}`);
 });
-

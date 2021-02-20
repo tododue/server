@@ -108,4 +108,4 @@ dist
 out/
 
 # No project config file
-app/config.json
+config.json

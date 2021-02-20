@@ -2,8 +2,8 @@
 
 // Execute check for Config.ts
 import * as fs from "fs";
-if (!fs.existsSync("./app/config.json")) {
-    console.error("Could not find ./app/config.json! (Did you copy it from config.json.example?)");
+if (!fs.existsSync("./config.json")) {
+    console.error("Could not find ./config.json! (Did you copy it from config.json.example?)");
     process.exit(1);
 }
 
