@@ -1,0 +1,24 @@
+{
+  "name": "tododue-server",
+  "version": "0.1.0",
+  "description": "To-Do Due Server",
+  "main": "server.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tododue/server.git"
+  },
+  "author": "To-Do Due Team",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/tododue/server/issues"
+  },
+  "homepage": "https://github.com/tododue/server#readme",
+  "dependencies": {
+    "@types/node": "^14.14.31",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.5"
+  }
+}

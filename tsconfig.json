@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "sourceMap": true,
+    "types": ["node"],
+    "allowJs": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  },
+  "include": ["types/**/*.ts", "app/*.ts"],
+  "exclude": [
+    "node_modules"
+  ]
+}
