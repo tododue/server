@@ -42,3 +42,5 @@ Keeping track of up to five different websites for scheduling work, assignments,
 ## Team
 
 | [![Zach Kroesen](https://github.com/GlitchyCzE.png?size=100)](https://github.com/GlitchyCzE) | [![Patrick Mehlbaum](https://github.com/pmehlb.png?size=100)](https://github.com/pmehlb) | [![Christopher Grabda](https://github.com/CGrabda.png?size=100)](https://github.com/CGrabda) |
+| ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| [Zach Kroesen]                                                                         | [Patrick Mehlbaum]                                                                         | [Christopher Grabda]                                                                         |
