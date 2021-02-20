@@ -8,7 +8,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
   },
-  "include": ["types/**/*.ts", "app/*.ts"],
+  "include": ["types/**/*.ts", "app/**"],
   "exclude": [
     "node_modules"
   ]
