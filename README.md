@@ -1,5 +1,5 @@
 <div align="center">
-	<img src="./app/public/assets/img/logo.svg" alt="To Do, Due"/>
+	<img src="./LogoReadMe.png" alt="To Do, Due"/>
 </div>
 
 # server
