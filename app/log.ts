@@ -8,4 +8,8 @@ export class Log {
         }
     }
 
+    static error(title: string, message?: string) {
+        this.info(title, message);
+    }
+
 }

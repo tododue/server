@@ -10,6 +10,7 @@ import {StaticRoute} from "./routes/staticroute";
 import {Config} from "../config";
 import {APIRoute} from "./routes/apiroute";
 import {Log} from "../log";
+import {DefaultRoute} from "./routes/defaultroute";
 
 
 // Create server
@@ -29,6 +30,9 @@ server.set('views', path.join(__dirname, "../views"));
 // Register routes
 StaticRoute.route(server);
 APIRoute.route(server);
+
+// Register Default Route -- Must be last
+DefaultRoute.route(server);
 
 // Start server!
 server.listen(Config.APP_PORT, Config.APP_ADDRESS, () => {
