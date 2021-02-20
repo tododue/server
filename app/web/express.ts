@@ -8,6 +8,7 @@ import * as path from "path";
 import {addAsync} from "@awaitjs/express";
 import {StaticRoute} from "./routes/staticroute";
 import {Config} from "../config";
+import {APIRoute} from "./routes/apiroute";
 
 
 // Create server
@@ -26,6 +27,7 @@ server.set('views', path.join(__dirname, "../views"));
 
 // Register routes
 StaticRoute.route(server);
+APIRoute.route(server);
 
 // Start server!
 server.listen(Config.APP_PORT, Config.APP_ADDRESS, () => {
