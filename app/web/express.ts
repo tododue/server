@@ -4,7 +4,7 @@ import * as bodyParser from "body-parser";
 import * as bearerToken from "express-bearer-token";
 import * as morgan from "morgan";
 import * as ejs from "ejs";
-import * as path from "ejs";
+import * as path from "path";
 import {addAsync} from "@awaitjs/express";
 import {StaticRoute} from "./routes/staticroute";
 import {Config} from "../config";
