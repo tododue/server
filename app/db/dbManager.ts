@@ -4,6 +4,8 @@ import {Log} from "../log";
 import {User} from "./orm/user";
 import {Assignment} from "./orm/assignment";
 import {Class} from "./orm/class";
+import {SqlEntity} from "./sqlEntity";
+import {validateOrReject} from "class-validator";
 
 export class DbManager {
 
@@ -41,6 +43,14 @@ export class DbManager {
 
     getClasses() {
         return this.sqlConnection.getRepository(Class);
+    }
+
+    async save(entity: SqlEntity) {
+        await validateOrReject(entity).catch((reason) => {
+            throw reason;
+        }).then(async () => {
+            await this.sqlConnection.getRepository(entity.constructor.name).save(entity);
+        });
     }
 
 
