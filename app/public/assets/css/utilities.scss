@@ -11,15 +11,15 @@ p {
   line-height: 1.8;
 }
 
-.text-left { text-align: left; }
-.text-right { text-align: right; }
+.text-left { text-align: left !important; }
+.text-right { text-align: right !important; }
 .text-center {
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
-.text-justify { text-align: justify; }
+.text-justify { text-align: justify !important; }
 
 // =========================================================
 // Modified from https://github.com/zachacole/Simple-Grid/

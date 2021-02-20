@@ -24,17 +24,6 @@ h6, p, li { font-family: PT Serif; font-weight: 300; }
 .text-light { color: var(--light); }
 .text-dark { color: var(--dark); }
 
-header a {
-	font-size: inherit;
-	text-decoration: none;
-	color: inherit;
-}
-
-header.nav-brand {
-	display: inline-block;
-	font-size: 2rem;
-}
-
 /*==================/
 / Hero
 /==================*/
@@ -50,11 +39,29 @@ header.hero-skewed {
 	z-index: 0;
 }
 
+header a {
+	font-size: inherit;
+	text-decoration: none;
+	color: inherit;
+}
+
+header .display {
+	font-size: 8rem;
+	font-weight: normal;
+	text-shadow: 2px 2px 12px rgba(0, 0, 0, .2);
+}
+
 /*==================/
 / Navigation
 /==================*/
+header{ user-select: none; }
+
 .nav-brand, nav.navbar {
 	display: inline-block;
+}
+
+.nav-brand .logo {
+	width: 250px;
 }
 
 nav.navbar {
@@ -77,7 +84,7 @@ ul.navbar > li {
 }
 
 .nav-link {
-	padding: .5rem 1rem;
+	padding: .75rem 1rem;
 	border-radius: 8px;
 }
 
