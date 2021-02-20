@@ -1,3 +1,10 @@
+:root {
+	--dark: #0f0f1f;
+	--light: #eeffff;
+	--theme-1: #7c56dc;
+	--theme-2: #241155;
+}
+
 html, body {
 	width: 100%;
 	height: 100%;
@@ -7,6 +14,13 @@ html, body {
 /*==================/
 / Typography
 /==================*/
+h1, h2, h3, h4, h5, h6, p { margin: 0; }
+h1, h2, h3 { font-family: Rubik; font-weight: 700; }
+h4, h5 { font-family: Rubik; font-weight: 500; }
+h6, p { font-family: PT Serif; font-weight: 400; }
+
+.text-light { color: var(--light); }
+.text-dark { color: var(--dark); }
 
 header a {
 	font-size: inherit;
@@ -14,12 +28,31 @@ header a {
 	color: inherit;
 }
 
+header.nav-brand {
+	display: inline-block;
+	font-size: 2rem;
+}
+
 /*==================/
 / Hero
 /==================*/
+header {
+	position: relative;
+	height: 300px;
+	background: linear-gradient(335deg, #7C56DC -30%, #241155);
+}
 
+header.hero-skewed {
+	/* top left, top right, bottom right, bottom left */
+	clip-path: polygon(0 0,	100% 0,	100% 100%, 0 calc(100% - 3vw));
+}
 
 /*==================/
 / Navigation
 /==================*/
-
+nav.navbar {
+	display: inline-block;
+}
+ul.navbar {
+	list-style: none;
+}
