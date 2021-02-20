@@ -1,5 +1,6 @@
 import {Connection, createConnection} from "typeorm";
 import {Config} from "../config";
+import {Log} from "../log";
 
 export class DBManager {
 
@@ -23,6 +24,7 @@ export class DBManager {
             process.exit(1);
         }).then(connection => {
            this.sqlConnection = connection;
+           Log.info("DBM", `Service Online! SQL Connection '${this.sqlConnection.name}' operational`);
         });
     }
 
