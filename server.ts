@@ -1,6 +1,6 @@
 // Entry point of server
 import * as fs from "fs";
-import {DBManager} from "./app/db/dbmanager";
+import {DbManager} from "./app/db/dbManager";
 import {Log} from "./app/log";
 
 // Execute check for config.json
@@ -13,8 +13,8 @@ Log.info("STARTUP", "Preflight check complete!");
 
 // Start Database Manager
 Log.info("STARTUP", "Starting DBM...");
-let DBM = new DBManager();
-DBManager.DBM = DBM;
+let DBM = new DbManager();
+DbManager.DBM = DBM;
 DBM.init();
 
 // Start webserver

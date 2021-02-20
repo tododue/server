@@ -6,11 +6,11 @@ import * as morgan from "morgan";
 import * as ejs from "ejs";
 import * as path from "path";
 import {addAsync} from "@awaitjs/express";
-import {StaticRoute} from "./routes/staticroute";
+import {StaticRoute} from "./routes/staticRoute";
 import {Config} from "../config";
-import {APIRoute} from "./routes/apiroute";
+import {ApiRoute} from "./routes/apiRoute";
 import {Log} from "../log";
-import {DefaultRoute} from "./routes/defaultroute";
+import {DefaultRoute} from "./routes/defaultRoute";
 
 
 // Create server
@@ -29,7 +29,7 @@ server.set('views', path.join(__dirname, "../views"));
 
 // Register routes
 StaticRoute.route(server);
-APIRoute.route(server);
+ApiRoute.route(server);
 
 // Register Default Route -- Must be last
 DefaultRoute.route(server);

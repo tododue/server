@@ -2,9 +2,9 @@ import {Connection, createConnection} from "typeorm";
 import {Config} from "../config";
 import {Log} from "../log";
 
-export class DBManager {
+export class DbManager {
 
-    static DBM: DBManager;
+    static DBM: DbManager;
     private sqlConnection: Connection;
 
     async init() {

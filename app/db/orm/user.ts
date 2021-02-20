@@ -1,9 +1,9 @@
 import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 import {IsBoolean, IsEmail, IsString, MaxLength} from "class-validator";
-import {SQLEntity} from "../sqlentity";
+import {SqlEntity} from "../sqlEntity";
 
 @Entity({name: "users"})
-export class User extends SQLEntity {
+export class User extends SqlEntity {
 
     @PrimaryGeneratedColumn()
     id: number;

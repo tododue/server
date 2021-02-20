@@ -1,6 +1,6 @@
 import {ExpressWithAsync} from "@awaitjs/express";
 
-export class APIRoute {
+export class ApiRoute {
 
     static route(server: ExpressWithAsync) {
 
