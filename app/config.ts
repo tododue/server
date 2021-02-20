@@ -8,6 +8,7 @@ let config = JSON.parse(configFile);
 
 export class Config {
 
+    static DEBUG_MODE = config["DEBUG_MODE"];
     static APP_ADDRESS = config["APP_ADDRESS"];
     static APP_PORT = config["APP_PORT"];
     static DB_HOST = config["DB_HOST"];
