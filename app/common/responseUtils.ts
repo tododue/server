@@ -6,7 +6,7 @@ export class ResponseUtils {
 
     static error(res: any, message) {
         res.status(400).send({error: 1, msg: message});
-        res.end();
+        // res.end();
     }
 
 }
