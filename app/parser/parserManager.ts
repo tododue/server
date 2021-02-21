@@ -12,7 +12,6 @@ export class ParserManager {
         }
 
         if (platform == Platform.RIT_WEBWORK) {
-            console.log("Entered");
             ParserWebWork.runParse(page, user);
         }
 
