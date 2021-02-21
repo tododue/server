@@ -100,10 +100,14 @@ export class AssignmentActions {
             assignment.overrideClose = new Date(close);
         }
         if (keys.includes("complete")) {
-            if (complete === "true") {
+            if (complete && (typeof complete == 'boolean')) {
+                assignment.overrideComplete = true;
+            } else if (!complete && (typeof complete == 'boolean')) {
+                assignment.overrideComplete = false;
+            } else if ((complete === "true" || complete == 1) && (typeof complete == 'string')) {
                 assignment.overrideComplete = true;
             }
-            if (complete === "false") {
+            if ((complete === "false" || complete == 0) && (typeof complete == 'string')) {
                 assignment.overrideComplete = false;
             }
         }
