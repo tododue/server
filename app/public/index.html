@@ -9,9 +9,13 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<link href="./assets/css/normalize.css" rel="stylesheet">
+		<link href="./assets/css/notyf.min.css" rel="stylesheet">
+		<link href="./assets/css/micromodal.min.css" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Rubik:ital,wght@0,300;0,500;0,700;1,500&display=swap" rel="stylesheet">
 		<link href="./assets/css/utilities.min.css" rel="stylesheet">
 		<link href="./assets/css/style.css" rel="stylesheet">
+
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	</head>
 	<body>
 		<header class="hero-skewed">
@@ -20,7 +24,8 @@
 				<ul class="navbar m-0 pr-3 text-center">
 					<li class="nav-link active"><a href="#">home</a></li>
 					<li class="nav-link"><a href="#about">about</a></li>
-					<li class="nav-link"><a href="#sign-up">get started</a></li>
+					<li class="nav-link"><a href="#" data-micromodal-trigger="signup-modal">get started</a></li>
+					<li class="nav-link"><a href="#" data-micromodal-trigger="login-modal">sign in</a></li>
 				</ul>
 			</nav>
 			<div class="container">
@@ -75,7 +80,7 @@
 				</div>
 				<div class="row no-gutter p-4">
 					<div class="hidden visible-inline-lg col-8-lg">
-						<img src="http://placehold.jp/222222/ffffff/1280x400.png">
+						<img src="http://placehold.jp/222222/ffffff/1000x400.png">
 					</div>
 				</div>
 			</div>
@@ -88,5 +93,64 @@
 				</div>
 			</div>
 		</footer>
+
+		<div id="signup-modal" class="modal micromodal-slide" aria-hidden="true">
+			<div class="modal__overlay" tab-index="-1" data-micromodal-close>
+				<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="signup-modal-title">
+					<header class="modal__header">
+						<h2 id="signup-modal-title" class="modal__title">Sign up!</h2>
+						<button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+					</header>
+					<main id="signup-modal-content" class="modal__content">
+						<p>All you need is your username and password. Try it out!</p>
+						<div id="form">
+							<div>
+								<input id="username" class="" type="text" min="6" max="7"><label for="username">Username<super class="text-red">*</super></label><span class="focus-border"></span>
+							</div>
+							<div>
+								<input id="password" type="password"><label for="password">Password<super class="text-red">*</super></label><span class="focus-border"></span>
+							</div>
+							<div>
+								<input id="password_validate" type="password"><label for="password_validate">Password (again)<super class="text-red">*</super></label><span class="focus-border"></span>
+							</div>
+						</div>
+					</main>
+					<footer class="modal__footer">
+						<button id="signup_btn" class="modal__btn modal__btn-primary submit" role="submit">Sign Up</button>
+						<button id="signup_close" class="modal__btn" data-micromodal-close>Close</button>
+					</footer>
+				</div>
+			</div>
+		</div>
+
+		<div id="login-modal" class="modal micromodal-slide" aria-hidden="true">
+			<div class="modal__overlay" tab-index="-1" data-micromodal-close>
+				<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="login-modal-title">
+					<header class="modal__header">
+						<h2 id="login-modal-title" class="modal__title">Log in!</h2>
+						<button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+					</header>
+					<main id="login-modal-content" class="modal__content">
+						<p>Get 'er done, log in!</p>
+						<div id="form">
+							<div>
+								<input id="username" class="" type="text" min="6" max="7"><label for="username">Username<super class="text-red">*</super></label><span class="focus-border"></span>
+							</div>
+							<div>
+								<input id="password" type="password"><label for="password">Password<super class="text-red">*</super></label><span class="focus-border"></span>
+							</div>
+						</div>
+					</main>
+					<footer class="modal__footer">
+						<button id="login_btn" class="modal__btn modal__btn-primary submit" role="submit">Log In</button>
+						<button id="login_close" class="modal__btn" data-micromodal-close>Close</button>
+					</footer>
+				</div>
+			</div>
+		</div>
+
+		<script src="./assets/js/micrmodal.min.js"></script>
+		<script src="./assets/js/notyf.min.js"></script>
+		<script src="assets/js/home.js"></script>
 	</body>
 </html>
