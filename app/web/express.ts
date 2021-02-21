@@ -25,7 +25,7 @@ const server = addAsync(express());
 
 // Express Middlewares
 server.use(morgan("[MORGAN] :remote-addr :remote-user :method :url HTTP/:http-version :status :res[content-length] - :response-time ms"));
-server.use(bodyParser.json());
+server.use(bodyParser.json({limit: "5mb"}));
 server.use(bodyParser.urlencoded({extended: true}));
 server.use(cookieParser());
 server.use(bearerToken());

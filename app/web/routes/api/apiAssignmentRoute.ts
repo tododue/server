@@ -7,6 +7,7 @@ import {User} from "../../../db/orm/user";
 import {AssignmentActions} from "../../../actions/assignmentActions";
 import {Platform} from "../../../common/platform";
 import {ClassActions} from "../../../actions/classActions";
+import {ParserManager} from "../../../parser/parserManager";
 
 export class ApiAssignmentRoute {
 
@@ -15,6 +16,7 @@ export class ApiAssignmentRoute {
 
         // Upload of an assignment page by the extension
         server.postAsync("/api/upload", (req, res) => {
+            let user: User = req["user"];
             let platform = req.body["platform"];
             let page = req.body["page"];
 
@@ -23,8 +25,8 @@ export class ApiAssignmentRoute {
                 return;
             }
 
-            // parser
-
+            ParserManager.parse(platform, user, page);
+            ResponseUtils.ok(res);
         });
 
         server.postAsync("/api/updateAssignment", async (req, res) => {
