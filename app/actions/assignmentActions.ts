@@ -76,8 +76,56 @@ export class AssignmentActions {
         let hidden = changes["hidden"];
 
         if (keys.includes("name")) {
-
+            assignment.overrideName = name;
         }
+        if (keys.includes("due")) {
+            assignment.overrideDue = due;
+        }
+        if (keys.includes("close")) {
+            assignment.overrideClose = close;
+        }
+        if (keys.includes("complete")) {
+            assignment.overrideComplete = complete;
+        }
+        if (keys.includes("note")) {
+            assignment.note = note;
+        }
+        if (keys.includes("hidden")) {
+            assignment.hidden = hidden;
+        }
+
+        await DBManager.DBM.save(assignment);
+    }
+
+    static async updateAssignmentRaw(assignment: Assignment, changes: object) {
+        let keys = Object.keys(changes);
+
+        let name = changes["name"];
+        let due = changes["due"];
+        let close = changes["close"];
+        let complete = changes["complete"];
+        let note = changes["note"];
+        let hidden = changes["hidden"];
+
+        if (keys.includes("name")) {
+            assignment.name = name;
+        }
+        if (keys.includes("due")) {
+            assignment.due = due;
+        }
+        if (keys.includes("close")) {
+            assignment.close = close;
+        }
+        if (keys.includes("complete")) {
+            assignment.complete = complete;
+        }
+        if (keys.includes("note")) {
+            assignment.note = note;
+        }
+        if (keys.includes("hidden")) {
+            assignment.hidden = hidden;
+        }
+        await DBManager.DBM.save(assignment);
     }
 
 
