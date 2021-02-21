@@ -104,10 +104,9 @@ export class AssignmentActions {
             if (complete === "false") {
                 assignment.complete = false;
                 console.log("override complete false");
-            }
-            if (complete === "true") {
+            } else {
                 assignment.complete = true;
-                console.log("override complete false");
+                console.log("override complete true");
             }
         }
         if (keys.includes("note")) {
