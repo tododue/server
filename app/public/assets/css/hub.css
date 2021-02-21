@@ -183,9 +183,25 @@ span.mark-unfinished { background: #ff4242; }
 span.mark-unfinished:hover { background: #d52121; }
 
 .actions {
-    margin-top: 25px
+    margin-top: 25px;
+}
+
+.form > .col-4-md {
+    font-size: 1.5rem;
+    padding-top: 6px;
 }
 
 .btn-password-reset {
-
+    padding: 5px 5%;
+    width: 100%;
+    font-family: 'Open Sans', Helvetica, sans-serif;;
+    font-size: 1.5rem;
+    border: 1px solid var(--theme-2);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }

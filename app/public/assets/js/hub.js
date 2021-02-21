@@ -171,6 +171,7 @@ $(document).ready(function() {
 		switch (section) {
 			case "logout":
 				$.get("./api/logout");
+				document.cookie = "";
 				window.location.href = "../";
 				break;
 			default:
@@ -211,8 +212,17 @@ $(document).ready(function() {
 	})
 
 	$("#assignments").on("click", "span.mark-finished, span.mark-unfinished", function() {
-		let id = $(this).closest("tr").data("assignment-id");
-		let toggle = ($(this).closest("tr").data("assignment-finished") == true) ? 0 : 1;
+
+		let closest = ($(this).parent().is("td")) ? "tr" : "div";
+		let id, toggle;
+
+		if (closest == "div") {
+			let id = $(this).parent().parent().data("assignment-id");
+			let toggle = ($(this).parent().parent().data("assignment-finished") == true) ? 0 : 1;
+		} else {
+			let id = $(this).closest(closest).data("assignment-id");
+			let toggle = ($(this).closest(closest).data("assignment-finished") == true) ? 0 : 1;
+		}
 
 		$.ajax({
 			type: "POST",
@@ -311,21 +321,19 @@ $(document).ready(function() {
 		}
 	});
 
-	$('#signup_btn').click(function() {
-		let username = $('#signup-modal input#username').val();
-		let email = $('#signup-modal input#email').val();
-		let password = $('#signup-modal input#password').val();
+	$('#reset_password_btn').click(function() {
+		let password = $('#reset-password-modal input#password').val();
+		let password_validate = $('#reset-password-modal input#password_validate').val();
 
-		if (password == $('#signup-modal input#password_validate').val()) {
+		if (password == password_validate) {
 			$.ajax({
 				type: "POST",
-				url: "register",
+				url: "./api/resetPassword",
 				data: {
-					username: username,
 					password: password
 				},
 				success: function(data) {
-					if (typeof data["responseJSON"]["msg"] == 'string') { defaultError.message = data["responseJSON"]["msg"]; notyf.error(defaultError); }
+					if (typeof data["msg"] == 'string') { defaultError.message = data["msg"]; notyf.error(defaultError); }
 					else { window.location.href = '/hub'; }
 				},
 				error: function(data) {
@@ -336,7 +344,7 @@ $(document).ready(function() {
 		} else {
 			notyf.error({
 				"duration": 4000,
-				"message": "Please enter the same password.",
+				"message": "Please enter matching passwords.",
 				"dismissable": true,
 				"position": {
 					"x": "right",
