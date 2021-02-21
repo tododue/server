@@ -2,7 +2,7 @@
 	<img src="./LogoReadMe.png" alt="To Do, Due"/>
 </div>
 
-# server
+# Server
 The To-Do Due Server - Hosted at [tododue.com](https://tododue.com)
 
 ---
