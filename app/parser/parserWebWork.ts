@@ -1,6 +1,5 @@
 import {User} from "../db/orm/user";
 import * as cheerio from "cheerio";
-import {Util} from "../common/util";
 import {ClassActions} from "../actions/classActions";
 import {Platform} from "../common/platform";
 import {AssignmentActions} from "../actions/assignmentActions";
@@ -59,7 +58,7 @@ export class ParserWebWork {
                     dateSplit[2] = dateSplit[2].replace("am", "");
                 }
                 let finalDate = dateSplit[0] + " " + dateSplit[2];
-                assignments.push(new MicroAssignment(assignmentName, aClass, Util.convertTZ(new Date(finalDate), "America/New_York")));
+                assignments.push(new MicroAssignment(assignmentName, aClass, new Date(finalDate)));
             }
         });
 
