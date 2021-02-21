@@ -1,0 +1,43 @@
+/*==================/
+/ Hub Styling
+/==================*/
+header.hub nav:after {
+    position: absolute;
+    content: "";
+    width: 90%;
+    top: 105px;
+    right: 15px;
+    height: 4px;
+    border-bottom: 4px dotted var(--theme-2);
+}
+
+header.hub:after {
+    position: absolute;
+    content: "";
+    width: 60%;
+    top: 120px;
+    right: 15px;
+    height: 4px;
+    border-bottom: 4px dotted var(--theme-2);
+}
+
+hr {
+    margin: 0;
+    padding: 0;
+    width: 80%;
+    text-align: left;
+    border: none;
+    border-bottom: 2px solid var(--theme-1);
+}
+
+.floating-buttons {
+    position: absolute;
+}
+
+.floating-button {
+
+}
+
+.floating-button:hover, .floating-button:focus {
+
+}
