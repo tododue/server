@@ -27,6 +27,7 @@ export class ParserWebWork {
         const list = $("table tbody", page);
         const aClass = $("#page-title", page).text();
         let assignments = [];
+        let statusRow = 2;
         console.log("class: " + aClass);
 
         let i = -1;
@@ -34,11 +35,21 @@ export class ParserWebWork {
             console.log("Looping " + $(element).text());
             i++;
             if (i == 0) {
+                let j = 0;
+                $(element).children().each(subElement => {
+                    if ($(subElement).text() == "Status") {
+                        console.log("Loop Statusrow Text: " + $(subElement).text());
+                        statusRow = j;
+                    }
+                    j++;
+                });
+                console.log("Set status row to " + statusRow);
                 return;
             }
             let assignmentName = $($(element).children()[1]).text();
-            let dueDate = $($(element).children()[2]).text();
+            let dueDate = $($(element).children()[statusRow]).text();
             if (dueDate.includes("Open, closes ")) {
+                console.log("HIT!");
                 dueDate = dueDate.replace("Open, closes ", "");
                 dueDate = dueDate.replace("/", "-");
                 dueDate = dueDate.replace("/", "-");
