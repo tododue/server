@@ -119,6 +119,16 @@ header.hero-skewed {
 	clip-path: polygon(0 0,	100% 0,	100% 100%, 0 calc(100% - 4vw));
 }
 
+header.hub {
+	position: relative;
+	height: 150px;
+	background: -o-linear-gradient(115deg, #7C56DC -30%, #241155);
+	background: linear-gradient(335deg, #7C56DC -30%, #241155);
+	/* top left, top right, bottom right, bottom left */
+	-webkit-clip-path: polygon(0 0,	100% 0,	100% 100%, 0 calc(100% - 4vw));
+	clip-path: polygon(0 0,	100% 0,	100% 100%, 0 calc(100% - 4vw));
+}
+
 header a {
 	font-size: inherit;
 	text-decoration: none;
@@ -134,10 +144,6 @@ header img.header-logo {
 
 #logo {
 	z-index: 0;
-}
-
-header .display strong {
-	display: inline-block;
 }
 
 /*==================/
@@ -241,6 +247,10 @@ main {
 	-moz-transition: var(--transition);
 	-o-transition: var(--transition);
 	-ms-transition: var(--transition);
+}
+
+.card-intro {
+	background: #efefef;
 }
 
 .card:hover {
