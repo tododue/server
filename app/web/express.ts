@@ -39,13 +39,13 @@ server.set('views', path.join(__dirname, "../views"));
 StaticRoute.route(server);
 SessionRoute.route(server);
 
-HubRoute.route(server);
-
 ApiRouteManager.route(server);
 ApiAdminRoute.route(server);
 ApiAssignmentRoute.route(server);
 ApiClassRoute.route(server);
 ApiUserRoute.route(server);
+
+HubRoute.route(server);
 
 // Register Default Route -- Must be last
 DefaultRoute.route(server);
