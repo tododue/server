@@ -27,6 +27,7 @@ export class ParserWebWork {
         const list = $("table tbody", page);
         const aClass = $("#page-title", page).text();
         let assignments = [];
+        console.log("class: " + aClass);
 
         let i = -1;
         list.children().each((index, element) => {
