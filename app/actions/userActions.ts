@@ -6,11 +6,14 @@ import {Util} from "../common/util";
 export class UserActions {
 
     static async createNewUser(username: string, email: string, password: string, isActivated?: boolean, isAdmin?: boolean): Promise<User> {
-        if (await DBManager.DBM.getUsers().find({username: username})) {
+        let userCheck = await DBManager.DBM.getUsers().findOne({username: username});
+
+        if (userCheck != null) {
             throw new Error("User with username " + username + " already exists!");
         }
+        userCheck = await DBManager.DBM.getUsers().findOne({email: email});
 
-        if (await DBManager.DBM.getUsers().find({email: email})) {
+        if (userCheck != null) {
             throw new Error("User with username " + email + " already exists!");
         }
 
