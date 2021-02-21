@@ -1,5 +1,16 @@
 import * as fs from "fs";
 import * as path from "path";
+import {Log} from "./log";
+
+// Preflight check...
+// Execute check for config.json
+Log.info("STARTUP", "Starting preflight check...");
+if (!fs.existsSync(path.join(process.cwd(), "config.json"))) {
+    Log.error("PREFLIGHT", "Could not find ./config.json! (Did you copy it from config.json.example?)");
+    Log.error("PREFLIGHT", "Stopping server...");
+    process.exit(1);
+}
+Log.info("STARTUP", "Preflight check complete!");
 
 // Read config file
 let configFile = fs.readFileSync(path.join(process.cwd(), "config.json"));
