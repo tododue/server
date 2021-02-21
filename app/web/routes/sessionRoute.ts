@@ -39,7 +39,7 @@ export class SessionRoute {
                 return;
             }
 
-            let session = await SessionActions.createSession(user, "Login from " + req.socket.address(), false);
+            let session = await SessionActions.createSession(user, "Login from " + req.socket.remoteAddress, false);
             session.id = undefined;
             session.user = undefined;
             res.send(session);
