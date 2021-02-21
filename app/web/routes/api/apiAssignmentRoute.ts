@@ -85,7 +85,24 @@ export class ApiAssignmentRoute {
 
             // todo: implement filter rules
 
-
+            let arr = [];
+            assignments.forEach(assignment => {
+                let obj = {};
+                obj["id"] = assignment.id;
+                obj["name"] = assignment.overrideName ? assignment.overrideName : assignment.name;
+                obj["class"] = assignment.class.overrideName ? assignment.class.overrideName : assignment.class.name;
+                obj["complete"] = assignment.overrideComplete ? assignment.overrideComplete : assignment.complete;
+                obj["due"] = assignment.overrideDue ? assignment.overrideDue : assignment.due;
+                obj["close"] = assignment.overrideClose ? assignment.overrideClose : assignment.close;
+                obj["overrideNameSet"] = assignment.overrideName != null;
+                obj["overrideCompleteSet"] = assignment.overrideComplete != null;
+                obj["overrideDueSet"] = assignment.overrideDue != null;
+                obj["overrideCloseSet"] = assignment.overrideClose != null;
+                obj["note"] = assignment.note;
+                obj["hidden"] = assignment.hidden;
+                arr.push(obj);
+            });
+            res.send(arr);
         });
     }
 }
