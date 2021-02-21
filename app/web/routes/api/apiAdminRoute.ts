@@ -2,6 +2,8 @@ import {ExpressWithAsync} from "@awaitjs/express";
 import {Log} from "../../../log";
 import {User} from "../../../db/orm/user";
 import {ResponseUtils} from "../../../common/responseUtils";
+import {UserActions} from "../../../actions/userActions";
+import {isEmpty} from "class-validator";
 
 export class ApiAdminRoute {
 
@@ -18,5 +20,31 @@ export class ApiAdminRoute {
 
             next();
         })
+
+        server.postAsync("/api/admin/resetPassword", async (req, res) => {
+            let username = req.body["username"];
+            let password = req.body["password"];
+
+            if (isEmpty(username) || isEmpty(password)) {
+                ResponseUtils.error(res, "Empty username or password");
+                return;
+            }
+
+            await UserActions.changePassword(username, password);
+            ResponseUtils.ok(res);
+        });
+
+        server.deleteAsync("/api/admin/deleteUser", async (req, res) => {
+            let username = req.body["username"];
+
+            if (isEmpty(username)) {
+                ResponseUtils.error(res, "Empty username");
+                return;
+            }
+
+            await UserActions.deleteUser(username);
+            ResponseUtils.ok(res);
+        });
+
     }
 }

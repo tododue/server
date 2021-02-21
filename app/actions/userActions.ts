@@ -79,6 +79,18 @@ export class UserActions {
         await DBManager.DBM.save(user);
     }
 
+    static async deleteUser(username: string) {
+        let user = await DBManager.DBM.getUsers().findOne({username: username});
+        if (user == null) {
+            throw new Error("User with username " + username + " doesn't exist");
+        }
+
+        await DBManager.DBM.getSessions().delete({user: user});
+        await DBManager.DBM.getAssignments().delete({owner: user});
+        await DBManager.DBM.getClasses().delete({owner: user});
+        await DBManager.DBM.getUsers().delete({id: user.id});
+    }
+
     static hashPassword(password: string, salt: string): string {
         let hash = crypto.createHmac('sha512', salt);
         hash.update(password);
