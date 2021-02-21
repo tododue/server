@@ -21,6 +21,7 @@ html, body {
 h1, h2, h3, h4, h5, h6, p { margin: 0; }
 h1, h2, h3, span { font-family: Rubik; font-weight: 700; }
 h4, h5 { font-family: Rubik; font-weight: 500; }
+input, label { font-family: Rubik; font-weight: 300; }
 h6, p, li { font-family: PT Serif; font-weight: 300; }
 
 .bg-light		{ background-color: var(--light); }
@@ -106,7 +107,7 @@ ul.navbar > li {
 /*==================/
 / Hero
 /==================*/
-header {
+header.hero-skewed {
 	position: relative;
 	height: 400px;
 	background: -o-linear-gradient(115deg, #7C56DC -30%, #241155);
@@ -259,4 +260,77 @@ main {
 /==================*/
 footer p {
 	font-family: 'Open Sans', Helvetica, sans-serif;
+}
+
+/*==================/
+/ Modal Styling
+/==================*/
+.modal__title {
+	font-size: 1.75rem;
+}
+
+.modal__content p {
+	font-size: 1.2rem;
+}
+
+/*==================/
+/ Form Styling
+/==================*/
+
+#form div {
+	position: relative;
+	display: block;
+	margin: 30px 10px;
+}
+
+#form input {
+	box-sizing: border-box;
+	letter-spacing: 1px;
+	border: 0;
+	padding: 4px 0;
+	border-bottom: 1px solid #aaa;
+	background-color: transparent;
+	width: 100%;
+	font-size: 22px;
+}
+
+#form input:focus {
+	outline: none;
+}
+
+#form input ~ .focus-border {
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	width: 0;
+	height: 2px;
+	background-color: #0182de;
+	transition: 0.4s;
+}
+#form input:focus ~ .focus-border, #form input.hascontent ~ .focus-border {
+	width: 100%;
+	transition: 0.4s;
+	left: 0;
+}
+
+#form input ~ label {
+	position: absolute;
+	left: 0;
+	width: 100%;
+	top: 9px;
+	color: #aaa;
+	transition: 0.3s;
+	z-index: -1;
+	letter-spacing: 0.5px;
+}
+
+#form input:focus ~ label, #form input.hascontent ~ label {
+	top: -16px;
+	font-size: 12px;
+	color: #0182de;
+	transition: 0.3s;
+}
+
+#form input.hascontent ~ label {
+	color: #aaa;
 }

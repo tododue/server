@@ -2,6 +2,7 @@ $(document).ready(function() {
 	MicroModal.init({
 		onClose: () => resetInputs()
 	});
+	var notyf = new Notyf();
 
 	if (window.location.search.substr(1).length > 0) {
 
@@ -70,16 +71,18 @@ $(document).ready(function() {
 		$('input#password_validate').removeClass('hascontent').val('');
 	};
 
-	$('#dhs_signup_btn').click(function() {
+	$('#signup_btn').click(function() {
 		let username = $('#signup-modal input#username').val();
+		let email = $('#signup-modal input#email').val();
 		let password = $('#signup-modal input#password').val();
 
 		if (password == $('#signup-modal input#password_validate').val()) {
 			$.ajax({
 				type: "POST",
-				url: "register/",
+				url: "register",
 				data: {
 					username: username,
+					email: email,
 					password: password
 				},
 				success: function(data) {
@@ -113,7 +116,7 @@ $(document).ready(function() {
 		}
 	});
 
-	$('#dhs_login_btn').click(function() {
+	$('#login_btn').click(function() {
 		let username = $('#login-modal input#username').val();
 		let password = $('#login-modal input#password').val();
 
