@@ -44,7 +44,7 @@ export class ApiAssignmentRoute {
                 return;
             }
 
-            if (assignment.owner != user) {
+            if (assignment.owner.id != user.id) {
                 ResponseUtils.error(res, "Assignment does not belong to you");
                 return;
             }
