@@ -1,0 +1,167 @@
+h1 { font-size: 3.5rem; }
+h2 { font-size: 3rem; }
+h3 { font-size: 2.5rem; }
+h4 { font-size: 2rem; }
+h5 { font-size: 1.75rem; }
+h6 { font-size: 1.5rem; }
+
+p {
+  font-size: 1.2rem;
+  font-weight: 200;
+  line-height: 1.8;
+}
+
+.text-left { text-align: left !important; }
+.text-right { text-align: right !important; }
+.text-center {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.text-justify { text-align: justify !important; }
+
+// =========================================================
+// Modified from https://github.com/zachacole/Simple-Grid/
+// =========================================================
+
+$width: 96%;
+$gutter: 4%;
+$breakpoint-sm: 33.75em; // 540px
+$breakpoint-md: 45em; // 720px
+$breakpoint-lg: 60em; // 960px
+
+.container {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media only screen and (min-width: $breakpoint-sm) {
+    width: 80%;
+  }
+
+  @media only screen and (min-width: $breakpoint-lg) {
+    width: 80%;
+    max-width: 85rem;
+  }
+}
+
+.container-fluid {
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.row {
+  position: relative;
+  width: 100%;
+}
+
+.row [class^="col"] {
+  float: left;
+  margin: 0.5rem 2%;
+  min-height: 0.125rem;
+}
+
+.row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
+  width: $width;
+}
+
+// what...
+.col-1-sm { width: ($width / 12) - ($gutter * 11 / 12); }
+.col-2-sm { width: ($width / 6) - ($gutter * 10 / 12); }
+.col-3-sm { width: ($width / 4) - ($gutter * 9 / 12); }
+.col-4-sm { width: ($width / 3) - ($gutter * 8 / 12); }
+.col-5-sm { width: ($width / (12 / 5)) - ($gutter * 7 / 12); }
+.col-6-sm { width: ($width / 2) - ($gutter * 6 / 12); }
+.col-7-sm { width: ($width / (12 / 7)) - ($gutter * 5 / 12); }
+.col-8-sm { width: ($width / (12 / 8)) - ($gutter * 4 / 12); }
+.col-9-sm { width: ($width / (12 / 9)) - ($gutter * 3 / 12); }
+.col-10-sm { width: ($width / (12 / 10)) - ($gutter * 2 / 12); }
+.col-11-sm { width: ($width / (12 / 11)) - ($gutter * 1 / 12); }
+.col-12-sm { width: $width; }
+
+@media only screen and (min-width: $breakpoint-md) {
+  .col-1 { width:($width / 12) - ($gutter * 11 / 12); }
+  .col-2 { width: ($width / 6) - ($gutter * 10 / 12); }
+  .col-3 { width: ($width / 4) - ($gutter * 9 / 12); }
+  .col-4 { width: ($width / 3) - ($gutter * 8 / 12); }
+  .col-5 { width: ($width / (12 / 5)) - ($gutter * 7 / 12); }
+  .col-6 { width: ($width / 2) - ($gutter * 6 / 12); }
+  .col-7 { width: ($width / (12 / 7)) - ($gutter * 5 / 12); }
+  .col-8 { width: ($width / (12 / 8)) - ($gutter * 4 / 12); }
+  .col-9 { width: ($width / (12 / 9)) - ($gutter * 3 / 12); }
+  .col-10 { width: ($width / (12 / 10)) - ($gutter * 2 / 12); }
+  .col-11 { width: ($width / (12 / 11)) - ($gutter * 1 / 12); }
+  .col-12 { width: $width; }
+
+  .hidden-sm { display: block; }
+}
+
+// =========================================================
+// Written to mimic Bootstrap padding / margin utilities
+// =========================================================
+$spacer: 1rem;
+$spacers: (
+        0: 0,
+        1: $spacer / 4,
+        2: $spacer / 2,
+        3: $spacer,
+        4: $spacer * 1.5,
+        5: $spacer * 3,
+);
+
+$sides: (
+        "": "",
+        "t": "-top",
+        "r": "-right",
+        "b": "-bottom",
+        "l": "-left",
+        "x": "",
+        "y": ""
+);
+
+$hiddens: (
+        "": "",
+        "-sm": $breakpoint-sm,
+        "-md": $breakpoint-md,
+        "-lg": $breakpoint-lg
+);
+
+@each $hidden_suffix, $hidden_value in $hiddens {
+  @each $level, $amount in $spacers {
+    @each $side_suffix, $side_value in $sides {
+      @if $hidden_value != "" {
+        @media only screen and (min-width: $hidden_value) {
+          @if $side_suffix == "x" {
+            .p#{$side_suffix}-#{$level}#{$hidden_suffix} { padding-left: #{$amount} !important; padding-right: #{$amount} !important; }
+            .m#{$side_suffix}-#{$level}#{$hidden_suffix} { margin-left#{$side_value}: #{$amount} !important; margin-right#{$side_value}: #{$amount} !important; }
+          } @else if $side_suffix == "y" {
+            .p#{$side_suffix}-#{$level}#{$hidden_suffix} { padding-top: #{$amount} !important; padding-bottom: #{$amount} !important; }
+            .m#{$side_suffix}-#{$level}#{$hidden_suffix} { margin-top#{$side_value}: #{$amount} !important; margin-bottom#{$side_value}: #{$amount} !important; }
+          } @else {
+            .p#{$side_suffix}-#{$level}#{$hidden_suffix} { padding#{$side_value}: #{$amount} !important; }
+            .m#{$side_suffix}-#{$level}#{$hidden_suffix} { margin#{$side_value}: #{$amount} !important; }
+          }
+        }
+      } @else {
+        @if $side_suffix == "x" {
+          .p#{$side_suffix}-#{$level}#{$hidden_suffix} { padding-left: #{$amount} !important; padding-right: #{$amount} !important; }
+          .m#{$side_suffix}-#{$level}#{$hidden_suffix} { margin-left#{$side_value}: #{$amount} !important; margin-right#{$side_value}: #{$amount} !important; }
+        } @else if $side_suffix == "y" {
+          .p#{$side_suffix}-#{$level}#{$hidden_suffix} { padding-top: #{$amount} !important; padding-bottom: #{$amount} !important; }
+          .m#{$side_suffix}-#{$level}#{$hidden_suffix} { margin-top#{$side_value}: #{$amount} !important; margin-bottom#{$side_value}: #{$amount} !important; }
+        } @else {
+          .p#{$side_suffix}-#{$level}#{$hidden_suffix} { padding#{$side_value}: #{$amount} !important; }
+          .m#{$side_suffix}-#{$level}#{$hidden_suffix} { margin#{$side_value}: #{$amount} !important; }
+        }
+      }
+    }
+  }
+}
