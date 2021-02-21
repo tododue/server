@@ -65,12 +65,15 @@ export class ParserMyCourses {
             }
         });
 
-        assignments.forEach(async (assignment) => {
-            let aClass = await ClassActions.getOrCreateClass(user, assignment.class, Platform.RIT_MYCOURSES);
-            let realAssignment = await AssignmentActions.getOrCreateAssignment(user, aClass, Platform.RIT_MYCOURSES, assignment.name, assignment.due, assignment.close);
-            realAssignment.due = assignment.due;
-            realAssignment.close = assignment.close;
-            await DBManager.DBM.save(realAssignment);
-        });
+        (async () => {
+            for (const assignment of assignments) {
+                let aClass = await ClassActions.getOrCreateClass(user, assignment.class, Platform.RIT_MYCOURSES);
+                let realAssignment = await AssignmentActions.getOrCreateAssignment(user, aClass, Platform.RIT_MYCOURSES, assignment.name, assignment.due, assignment.close);
+                realAssignment.due = assignment.due;
+                realAssignment.close = assignment.close;
+                await DBManager.DBM.save(realAssignment);
+            }
+        })();
+
     }
 }
