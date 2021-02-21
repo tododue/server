@@ -355,6 +355,7 @@ footer p {
 	background-color: #0182de;
 	transition: 0.4s;
 }
+
 #form input:focus ~ .focus-border, #form input.hascontent ~ .focus-border {
 	width: 100%;
 	transition: 0.4s;
@@ -385,4 +386,11 @@ label.datetime {
 
 #form input.hascontent ~ label {
 	color: #aaa;
+}
+
+#form textarea {
+	width: 100%;
+	font-family: 'Open Sans', Helvetica, sans-serif;
+	font-size: 1.2rem;
+	resize: vertical;
 }

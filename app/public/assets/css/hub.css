@@ -153,7 +153,7 @@ td.td-actions {
     width: 355px;
 }
 
-span.modal-edit, span.modal-finished, span.modal-unfinished {
+span.modal-edit, span.mark-finished, span.mark-unfinished {
     margin: 0 4px;
     padding: 5px 5%;
     width: 36%;
@@ -176,11 +176,11 @@ span.modal-edit, span.modal-finished, span.modal-unfinished {
 span.modal-edit { background: #6495ed; }
 span.modal-edit:hover { background: #3b70d1; }
 
-span.modal-finished { background: #13ab06; }
-span.modal-finished:hover { background: #109504; }
+span.mark-finished { background: #13ab06; }
+span.mark-finished:hover { background: #109504; }
 
-span.modal-unfinished { background: #ff4242; }
-span.modal-unfinished:hover { background: #d52121; }
+span.mark-unfinished { background: #ff4242; }
+span.mark-unfinished:hover { background: #d52121; }
 
 .actions {
     margin-top: 25px

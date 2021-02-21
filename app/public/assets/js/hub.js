@@ -4,7 +4,7 @@ if (!document.cookie.match(/token=.{32}/)) {
 
 function getFormattedDate(date, justTime = false, withTime = false) {
 	if (withTime) {
-		return ("0" + (date.getMonth() + 1)).slice(-2) + '-' + ("0" + date.getDate()).slice(-2) + '-' + date.getFullYear() + ' ' + ("0" + date.getHours()).slice(-2) + ':' + ("0" + date.getMinutes()).slice(-2);
+		return ("0" + (date.getMonth() + 1)).slice(-2) + '-' + ("0" + date.getDate()).slice(-2) + '-' + date.getFullYear() + ', ' + ("0" + date.getHours()).slice(-2) + ':' + ("0" + date.getMinutes()).slice(-2);
 	}
 	if (justTime) {
 		return ("0" + date.getHours()).slice(-2) + ':' + ("0" + date.getMinutes()).slice(-2);
@@ -37,10 +37,10 @@ $(document).ready(function() {
 		$("#assignments").empty();
 		let div = '<table><thead><tr><th>Name</th><th>Class</th><th>Due</th><th class="text-center">Actions</th></tr></thead><tbody>';
 		for (let assignment of assignments) {
-			div += '<tr data-assignment-finished="' + ((assignment["overrideCompleteSet"] == true) ? 1 : 0) + '" data-assignment-id="' + assignment["id"] + '" data-assignment-name="' + assignment["name"] + '" data-assignment-class="' + assignment["class"] + '" data-assignment-due="' + assignment["due"] + '" data-assignment-close="' + assignment["close"] + '">';
+			div += '<tr data-assignment-finished="' + ((assignment["overrideCompleteSet"] == true) ? 1 : 0) + '" data-assignment-id="' + assignment["id"] + '" data-assignment-name="' + assignment["name"] + '" data-assignment-class="' + assignment["class"] + '" data-assignment-due="' + assignment["due"] + '" data-assignment-close="' + assignment["close"] + ((assignment["note"] != null) ? '" data-note="' + assignment["note"] : '') + '">';
 			div += '<td>' + assignment["name"] + '</td><td>' + assignment["class"] + '</td>';
 			div += '<td>' + getFormattedDate(new Date(assignment["due"]), true) + ((assignment["close"] != assignment["due"]) ? ' / Closes: ' + getFormattedDate(new Date(assignment["close"])) : '') + '</td>';
-			div += '<td class="td-actions"><span class="modal-edit" data-micromodal-trigger="edit-assignment-modal">Edit</span>' + ((assignment["complete"]) ? '<span class="modal-unfinished">Mark Unfinished</span>' : '<span class="modal-finished">Mark Finished</span>') + '</td>';
+			div += '<td class="td-actions"><span class="modal-edit" data-micromodal-trigger="edit-assignment-modal">Edit</span>' + ((assignment["complete"]) ? '<span class="mark-unfinished">Mark Unfinished</span>' : '<span class="mark-finished">Mark Finished</span>') + '</td>';
 			div += ((assignment["note"] != null) ? '</tr><tr class="note"><td colspan="4"><strong>^^^ NOTE:</strong> ' + assignment["note"] + '</td>' : '');
 			div += '</tr>';
 		}
@@ -51,12 +51,12 @@ $(document).ready(function() {
 
 	function addAssignmentsList() {
 		$("#assignments").empty();
-		let div = '<table><thead><tr><th>Name</th><th>Class</th><th>Due</th><th>Actions</th></tr></thead><tbody>';
+		let div = '<table><thead><tr><th>Name</th><th>Class</th><th>Due</th><th class="text-center">Actions</th></tr></thead><tbody>';
 		for (let assignment of assignments) {
-			div += '<tr data-assignment-finished="' + ((assignment["overrideCompleteSet"] == true) ? 1 : 0) + '" data-assignment-id="' + assignment["id"] + '" data-assignment-name="' + assignment["name"] + '" data-assignment-class="' + assignment["class"] + '" data-assignment-due="' + assignment["due"] + '" data-assignment-close="' + assignment["close"] + '">';
+			div += '<tr data-assignment-finished="' + ((assignment["overrideCompleteSet"] == true) ? 1 : 0) + '" data-assignment-id="' + assignment["id"] + '" data-assignment-name="' + assignment["name"] + '" data-assignment-class="' + assignment["class"] + '" data-assignment-due="' + assignment["due"] + '" data-assignment-close="' + assignment["close"] + ((assignment["note"] != null) ? '" data-note="' + assignment["note"] : '') + '">';
 			div += '<td>' + assignment["name"] + '</td><td>' + assignment["class"] + '</td>';
 			div += '<td>' + getFormattedDate(new Date(assignment["due"]), false, true) + ((typeof assignment["closes"] != 'undefined') ? ' / Closes: ' + getFormattedDate(new Date(assignment["due"]), false, true) : '') + '</td>';
-			div += '<td class="td-actions"><span class="modal-edit" data-micromodal-trigger="edit-assignment-modal">Edit</span>' + ((assignment["complete"]) ? '<span class="modal-unfinished">Mark Unfinished</span>' : '<span class="modal-finished">Mark Finished</span>') + '</td>';
+			div += '<td class="td-actions"><span class="modal-edit" data-micromodal-trigger="edit-assignment-modal">Edit</span>' + ((assignment["complete"]) ? '<span class="mark-unfinished">Mark Unfinished</span>' : '<span class="mark-finished">Mark Finished</span>') + '</td>';
 			div += ((assignment["note"] != null) ? '</tr><tr class="note"><td colspan="4"><strong>^^^ NOTE:</strong> ' + assignment["note"] + '</td>' : '');
 			div += '</tr>';
 		}
@@ -69,11 +69,12 @@ $(document).ready(function() {
 		$("#assignments").empty();
 		for (let assignment of assignments) {
 			let div = '<div class="col-4-sm col-3-lg"><div class="card" ';
-			div	   += 'data-assignment-finished="' + ((assignment["overrideCompleteSet"] == true) ? 1 : 0) + '" data-assignment-id="' + assignment["id"] + '" data-assignment-name="' + assignment["name"] + '" data-assignment-class="' + assignment["class"] + '" data-assignment-due="' + assignment["due"] + '" data-assignment-close="' + assignment["close"] + '">';
+			div	   += 'data-assignment-finished="' + ((assignment["overrideCompleteSet"] == true) ? 1 : 0) + '" data-assignment-id="' + assignment["id"] + '" data-assignment-name="' + assignment["name"] + '" data-assignment-class="' + assignment["class"] + '" data-assignment-due="' + assignment["due"] + '" data-assignment-close="' + assignment["close"] + ((assignment["note"] != null) ? '" data-note="' + assignment["note"] : '') + '">';
 			div    += '<h5 class="card-title">' + assignment["name"] + ' (' + assignment["class"] + ')</h5><p class="card-content">';
-			div    += 'Due by: ' + getFormattedDate(new Date(assignment["due"])) + ((typeof assignment["closes"] != 'undefined') ? ' / Closes: ' + getFormattedDate(new Date(assignment["closes"])) : '');
+			div    += 'Due by: ' + getFormattedDate(new Date(assignment["due"]), false, true) + ((typeof assignment["closes"] != 'undefined') ? ' / Closes: ' + getFormattedDate(new Date(assignment["closes"]), false, true) : '');
+			div    += ((assignment["note"] != null) ? '<hr>Note: ' + assignment["note"] : '');
 			div    += '<br>';
-			div    += '<div class="actions"><span class="modal-edit" data-micromodal-trigger="edit-assignment-modal">Edit</span>' + ((assignment["complete"]) ? '<span class="modal-unfinished">Mark Unfinished</span>' : '<span class="modal-finished">Mark Finished</span>') + '</div>';
+			div    += '<div class="actions"><span class="modal-edit" data-micromodal-trigger="edit-assignment-modal">Edit</span>' + ((assignment["complete"]) ? '<span class="mark-unfinished">Mark Unfinished</span>' : '<span class="mark-finished">Mark Finished</span>') + '</div>';
 			div    += '</p></div></div>';
 
 			$("#assignments").append(div);
@@ -175,18 +176,38 @@ $(document).ready(function() {
 		}
 	});
 
-	$("#assignments").on("click", "span[data-micromodal-trigger='edit-assignment-modal']", function () {
-		$("#edit-assignment-modal input#assignment_id").val($(this).closest("tr").data("assignment-id"));
-		$("#edit-assignment-modal input#name").val($(this).closest("tr").data("assignment-name"));
-		$("#edit-assignment-modal input#class").val($(this).closest("tr").data("assignment-class"));
-		$("#edit-assignment-modal input#due").val(new Date($(this).closest("tr").data("assignment-due")).toJSON().slice(0,19));
-		$("#edit-assignment-modal input#close").val(new Date($(this).closest("tr").data("assignment-close")).toJSON().slice(0,19));
+	$("#assignments").on("click", "span[data-micromodal-trigger='edit-assignment-modal']", function() {
+		let closest = ($(this).parent().is("td")) ? "tr" : "div";
+		let id_input, name_input, class_input, due_input, close_input, note_input;
+
+		if (closest == "div") {
+			id_input = $(this).parent().parent().data("assignment-id");
+			name_input = $(this).parent().parent().data("assignment-name");
+			class_input = $(this).parent().parent().data("assignment-class");
+			due_input = $(this).parent().parent().data("assignment-due");
+			close_input = $(this).parent().parent().data("assignment-close");
+			note_input = $(this).parent().parent().data("assignment-note");
+		} else {
+			id_input = $(this).closest(closest).data("assignment-id");
+			name_input = $(this).closest(closest).data("assignment-name");
+			class_input = $(this).closest(closest).data("assignment-class");
+			due_input = $(this).closest(closest).data("assignment-due");
+			close_input = $(this).closest(closest).data("assignment-close");
+			note_input = $(this).closest(closest).data("assignment-note");
+		}
+
+		$("#edit-assignment-modal input#assignment_id").val(id_input);
+		$("#edit-assignment-modal input#name").val(name_input);
+		$("#edit-assignment-modal input#class").val(class_input);
+		$("#edit-assignment-modal input#due").val(new Date(due_input).toJSON().slice(0,19));
+		$("#edit-assignment-modal input#close").val(new Date(close_input).toJSON().slice(0,19));
+		$("#edit-assignment-modal textarea#note").text(note_input);
 
 		$("#edit-assignment-modal input#name").addClass("hascontent");
 		$("#edit-assignment-modal input#class").addClass("hascontent");
 	})
 
-	$("#assignments").on("click", "span.mark-finished, span.mark-unfinished", function () {
+	$("#assignments").on("click", "span.mark-finished, span.mark-unfinished", function() {
 		let id = $(this).closest("tr").data("assignment-id");
 		let toggle = ($(this).closest("tr").data("assignment-finished") == true) ? 0 : 1;
 
@@ -223,7 +244,8 @@ $(document).ready(function() {
 					class: class_name,
 					name: name,
 					due: due,
-					close: close
+					close: close,
+					note: note
 				},
 				success: function(data) {
 					let action = (window.location.hash.substr(1) > 0) ? window.location.hash.substr(1) : 'hub';
