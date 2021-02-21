@@ -16,6 +16,7 @@ import {ApiAssignmentRoute} from "./routes/api/apiAssignmentRoute";
 import {ApiClassRoute} from "./routes/api/apiClassRoute";
 import {ApiUserRoute} from "./routes/api/apiUserRoute";
 import {SessionRoute} from "./routes/sessionRoute";
+import {HubRoute} from "./routes/hubRoute";
 
 
 // Create server
@@ -35,6 +36,8 @@ server.set('views', path.join(__dirname, "../views"));
 // Register routes
 StaticRoute.route(server);
 SessionRoute.route(server);
+
+HubRoute.route(server);
 
 ApiRouteManager.route(server);
 ApiAdminRoute.route(server);
