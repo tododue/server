@@ -30,6 +30,7 @@ export class ParserWebWork {
 
         let i = -1;
         list.children().each((index, element) => {
+            console.log("Looping " + $(element).text());
             i++;
             if (i == 0) {
                 return;
@@ -56,7 +57,6 @@ export class ParserWebWork {
 
         (async () => {
             for (const assignment of assignments) {
-                console.log(assignment);
                 let aClass = await ClassActions.getOrCreateClass(user, assignment.class, Platform.RIT_WEBWORK);
                 let realAssignment = await AssignmentActions.getOrCreateAssignment(user, aClass, Platform.RIT_WEBWORK, assignment.name, assignment.due, assignment.due);
                 realAssignment.due = assignment.due;
