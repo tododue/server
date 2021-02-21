@@ -15,6 +15,7 @@ export class DefaultRoute {
         // 404 Route - Happens when client requests for something that doesn't exist
         server.get('*', (req, res) => {
             res.status(404).send("<pre>Error 404: Not Found</pre>");
+            // sendFile(config.root + '/public/404.html')
         });
 
     }
