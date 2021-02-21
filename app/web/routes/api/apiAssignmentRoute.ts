@@ -16,6 +16,11 @@ export class ApiAssignmentRoute {
             let platform = req.body["platform"];
             let page = req.body["page"];
 
+            if (isEmpty(platform) || isEmpty(page)) {
+                ResponseUtils.error(res, "Platform or page not sent");
+                return;
+            }
+
             // parser
 
         });
@@ -42,6 +47,24 @@ export class ApiAssignmentRoute {
 
             await AssignmentActions.updateAssignment(assignment, req.body);
             ResponseUtils.ok(res);
+        });
+
+        server.postAsync("/api/assignments", async (req, res) => {
+            let user: User = req["user"];
+
+            let includeHidden = req.body["includeHidden"];
+            let ignoreCompleted = req.body["hideCompleted"];
+            let ignorePast = req.body["hidePast"];
+            let startDate = req.body["startDate"];
+            let endDate = req.body["endDate"];
+            let filterClassName = req.body["filterClassName"];
+            let filterAssignmentName = req.body["filterAssignmentName"];
+
+            let assignments = await DBManager.DBM.getAssignments().find({owner: user});
+
+            // todo: yup
+
+
         });
     }
 }
