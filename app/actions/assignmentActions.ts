@@ -102,10 +102,10 @@ export class AssignmentActions {
         if (keys.includes("complete")) {
             console.log(complete + " type of " + typeof complete);
             if (complete === "true") {
-                assignment.complete = true;
+                assignment.complete = false;
                 console.log("override complete false");
             } else {
-                assignment.complete = false;
+                assignment.complete = true;
                 console.log("override complete true");
             }
         }
