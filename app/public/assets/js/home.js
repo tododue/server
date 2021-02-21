@@ -59,7 +59,7 @@ $(document).ready(function() {
 				},
 				success: function(data) {
 					if (typeof data["msg"] == 'string' && data["error"] != 0) { defaultError.message = data["msg"]; notyf.error(defaultError); }
-					else { defaultError.message = "Successfully registered! Please log in..."; notyf.success(defaultError); }
+					else { defaultError.message = "Successfully registered! Please log in..."; notyf.success(defaultError); MicroModal.hide('signup-modal'); }
 				},
 				error: function(data) {
 					defaultError.message = data["responseJSON"]["msg"];
