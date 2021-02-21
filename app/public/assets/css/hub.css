@@ -30,6 +30,9 @@ hr {
     border-bottom: 2px solid var(--theme-1);
 }
 
+.section { display: none; }
+.section.active { display: block; }
+
 .floating-buttons {
     position: absolute;
     top: 50%;

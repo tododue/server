@@ -20,10 +20,11 @@ $(document).ready(function() {
 
 	function addAssigment(assignment) {
 		assignments.push(assignment);
-		addAssignments();
+		addAssignmentsCourse();
 	}
 
-	function addAssignments() {
+	function addAssignments24h() {
+		$("#assignments").empty();
 		for (let assignment of assignments) {
 			let div = '<div class="col-4-sm col-2-lg less-gutter"><div class="card">';
 			div    += '<h5 class="card-title">' + assignment["name"] + ' (' + assignment["class"] + ' )</h5><p class="card-content">';
@@ -36,61 +37,122 @@ $(document).ready(function() {
 		}
 	}
 
+	function addAssignmentsList() {
+		$("#assignments").empty();
+		for (let assignment of assignments) {
+			let div = '<div class="col-4-sm col-2-lg less-gutter"><div class="card">';
+			div    += '<h5 class="card-title">' + assignment["name"] + ' (' + assignment["class"] + ' )</h5><p class="card-content">';
+			div    += 'Due by: ' + assignment["due"] + ((typeof assignment["closes"] != 'undefined') ? ' / Closes: ' + assignment["closes"] : '');
+			div    += '<br>';
+			div    += ((assignment["complete"]) ? 'mark incomplete' : 'complete');
+			div    += '</p></div></div>';
+
+			$("#assignments").append(div);
+		}
+	}
+
+	function addAssignmentsCourse() {
+		$("#assignments").empty();
+		for (let assignment of assignments) {
+			let div = '<div class="col-4-sm col-2-lg less-gutter"><div class="card">';
+			div    += '<h5 class="card-title">' + assignment["name"] + ' (' + assignment["class"] + ' )</h5><p class="card-content">';
+			div    += 'Due by: ' + assignment["due"] + ((typeof assignment["closes"] != 'undefined') ? ' / Closes: ' + assignment["closes"] : '');
+			div    += '<br>';
+			div    += ((assignment["complete"]) ? 'mark incomplete' : 'complete');
+			div    += '</p></div></div>';
+
+			$("#assignments").append(div);
+		}
+	}
+
+	function callAPI(action) {
+		switch (action) {
+			case "hub":
+				$.ajax({
+					url: "./api/assignmentDueIn24h",
+					type: "POST",
+					success: function(data) {
+						assignments = data;
+						addAssignments24h();
+					},
+					error: function(data) {
+						console.log(data);
+						if (typeof data["responseJSON"]["msg"] == 'string') { defaultError.message = data["responseJSON"]["msg"]; }
+						notyf.error(defaultError);
+					}
+				});
+				break;
+			case "assignments":
+				$.ajax({
+					url: "./api/assignments",
+					type: "POST",
+					success: function(data) {
+						assignments = data;
+						addAssignmentsList();
+					},
+					error: function(data) {
+						if (typeof data["responseJSON"]["msg"] == 'string') { defaultError.message = data["responseJSON"]["msg"]; }
+						notyf.error(defaultError);
+					}
+				});
+				break;
+			case "courses":
+				$.ajax({
+					url: "./api/assignments",
+					type: "POST",
+					success: function(data) {
+						assignments = data;
+						addAssignmentsCourse();
+					},
+					error: function(data) {
+						if (typeof data["responseJSON"]["msg"] == 'string') { defaultError.message = data["responseJSON"]["msg"]; }
+						notyf.error(defaultError);
+					}
+				});
+				break;
+			case "profile":
+				$.ajax({
+					url: "./api/profile",
+					type: "POST",
+					success: function(data) {
+						// assignments = data;
+					},
+					error: function(data) {
+						if (typeof data["responseJSON"]["msg"] == 'string') { defaultError.message = data["responseJSON"]["msg"]; }
+						notyf.error(defaultError);
+					}
+				});
+				break;
+		}
+	}
+
 	if (window.location.hash.length > 0) {
 		if ($('.li[data-link="' + window.location.hash.substr(1) + '"]').length > 0) {
 			let element = $('.li[data-link="' + window.location.hash.substr(1) + '"]');
 			element.addClass('active');
 			switch (window.location.hash.substr(1)) {
-
+				case "hub", "assignments", "courses":
+					break;
 			}
 		}
+	} else {
+		$("li[data-link='hub']").addClass("active");
+		callAPI("hub");
 	}
 
 	$(".data-link").on("click", function() {
 		$("ul.navbar li").removeClass("active");
 		let section = $(this).data("link");
-
 		$(this).parent().addClass("active");
+
 		window.location.hash = '#' + section;
 
 		switch (section) {
-			case "hub":
-				$("#assignments").empty();
-
-				$.ajax({
-					url: "./api/assignmentDueIn24h",
-					type: "POST",
-					success: function(e) {
-
-					},
-					error: function(e) {
-
-					}
-				});
-
-				addAssignments();
-				break;
-			case "assignments":
-				break;
-			case "courses":
-				break;
-			case "profile":
-				break;
 			case "logout":
-				break
-		}
-	});
-
-	$.ajax({
-		url: "./api/assignments",
-		type: "POST",
-		success: (e) => {
-			assignments = e;
-			addAssignments();
-		},
-		error: (e) => {
-			defaultError.message = "Error reading assignments."
-			notyf.error(defaultError);
+				break;
+			default:
+				callAPI(section);
+				break;
 		}
 	});
 
@@ -114,7 +176,7 @@ $(document).ready(function() {
 					addAssigment({class: class_name, name: name, due: due, close: close});
 				},
 				error: function(data) {
-					defaultError.message = data.responseJSON["msg"];
+					defaultError.message = data["responseJSON"]["msg"];
 					notyf.error(defaultError);
 				}
 			});

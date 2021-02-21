@@ -58,11 +58,11 @@ $(document).ready(function() {
 					password: password
 				},
 				success: function(data) {
-					if (typeof data.responseJSON["msg"] == 'string') { defaultError.message = data.responseJSON["msg"]; notyf.error(defaultError); }
+					if (typeof data["responseJSON"]["msg"] == 'string') { defaultError.message = data["responseJSON"]["msg"]; notyf.error(defaultError); }
 					else { window.location.href = '/hub'; }
 				},
 				error: function(data) {
-					defaultError.message = data.responseJSON["msg"];
+					defaultError.message = data["responseJSON"]["msg"];
 					notyf.error(defaultError);
 				}
 			});
@@ -96,7 +96,7 @@ $(document).ready(function() {
 					window.location.href = '/hub';
 			},
 			error: function(data) {
-				if (typeof data.responseJSON["msg"] == 'string') { defaultError.message = data.responseJSON["msg"]; }
+				if (typeof data["responseJSON"]["msg"] == 'string') { defaultError.message = data["responseJSON"]["msg"]; }
 				notyf.error(defaultError);
 			}
 		});
