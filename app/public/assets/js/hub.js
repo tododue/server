@@ -220,8 +220,8 @@ $(document).ready(function() {
 			let id = $(this).parent().parent().data("assignment-id");
 			let toggle = ($(this).parent().parent().data("assignment-finished") == true) ? 0 : 1;
 		} else {
-			let id = $(this).closest(closest).data("assignment-id");
-			let toggle = ($(this).closest(closest).data("assignment-finished") == true) ? 0 : 1;
+			let id = $(this).closest("tr").data("assignment-id");
+			let toggle = ($(this).closest("tr").data("assignment-finished") == true) ? 0 : 1;
 		}
 
 		$.ajax({
