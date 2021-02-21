@@ -15,5 +15,20 @@ export class ClassActions {
         return aClass;
     }
 
+    static async getOrCreateClass(owner: User, platform: Platform, identifier: string): Promise<Class> {
+        let aClass = await DBManager.DBM.getClasses().findOne({
+            owner: owner,
+            platform: platform,
+            identifier: identifier
+        });
+
+        if (aClass == null) {
+            aClass = await this.createClass(owner, platform, identifier, identifier);
+            await DBManager.DBM.save(aClass);
+        }
+
+        return aClass;
+    }
+
 
 }

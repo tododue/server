@@ -20,6 +20,21 @@ export class AssignmentActions {
         return assignment;
     }
 
+    static async getOrCreateAssignment(owner: User, aClass: Class, platform: Platform, identifier: string, due: Date, close?: Date) {
+        let assignment = await DBManager.DBM.getAssignments().findOne({
+            owner: owner,
+            class: aClass,
+            platform: platform,
+            identifier: identifier
+        });
+
+        if (assignment == null) {
+            assignment = await this.createAssignment(owner, aClass, platform, identifier, identifier, due, close ? close : due);
+        }
+
+        return assignment;
+    }
+
     static async renameAssignment(id: number, name: string) {
         let assignment = await DBManager.DBM.getAssignments().findOne({id: id});
         if (assignment == null) {
