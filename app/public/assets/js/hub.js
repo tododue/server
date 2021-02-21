@@ -218,10 +218,10 @@ $(document).ready(function() {
 
 		if (closest == "div") {
 			id = $(this).parent().parent().data("assignment-id");
-			toggle = ($(this).parent().parent().data("assignment-finished") == true) ? false : true;
+			toggle = ($(this).parent().parent().data("assignment-finished") == true || $(this).parent().parent().data("assignment-finished") == null) ? false : true;
 		} else {
 			id = $(this).closest("tr").data("assignment-id");
-			toggle = ($(this).closest("tr").data("assignment-finished") == true) ? false : true;
+			toggle = ($(this).closest("tr").data("assignment-finished") == true || $(this).parent().parent().data("assignment-finished") == null) ? false : true;
 		}
 
 		$.ajax({
