@@ -1,5 +1,6 @@
 import {ExpressWithAsync} from "@awaitjs/express";
 import {Log} from "../../log";
+import {User} from "../../db/orm/user";
 
 export class HubRoute {
 
@@ -7,7 +8,8 @@ export class HubRoute {
 		Log.info("EXPRESS", "Registering HubRoute...");
 
 		server.get("/hub", (req, res) => {
-				res.render('hub', {"username": req["user"]});
+			let user: User = req["user"];
+			res.render('hub', {"user": user});
 		});
 	}
 }

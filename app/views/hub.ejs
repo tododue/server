@@ -74,7 +74,7 @@
         </div>
         <div id="profile" class="section container-fluid">
             <div class="row">
-                <h1 class="pl-2">YOU<%= () ? ' (ADMIN)' : '' %></h1>
+                <h1 class="pl-2">YOU<%= (user.isAdmin) ? ' (ADMIN)' : '' %></h1>
                 <hr>
                 <div class="floating-buttons">
                     <button class="floating-button add-button" title="Add Custom Assignment" data-micromodal-trigger="add-assignment-modal">
