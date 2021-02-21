@@ -6,10 +6,10 @@ import {DBManager} from "../../db/DBManager";
 import {UserActions} from "../../actions/userActions";
 import {SessionActions} from "../../actions/sessionActions";
 
-export class LoginRoute {
+export class SessionRoute {
 
     static route(server: ExpressWithAsync) {
-        Log.info("EXPRESS", "Registering LoginRoute...");
+        Log.info("EXPRESS", "Registering SessionRoute...");
 
         server.postAsync("/login", async (req, res) => {
             let username = req.body["username"];
@@ -19,6 +19,8 @@ export class LoginRoute {
                 ResponseUtils.error(res, "Empty username or password");
                 return;
             }
+
+            // TODO: Rate limiting
 
             let user = await DBManager.DBM.getUsers().findOne({username: username});
             if (user == null) {
@@ -41,6 +43,25 @@ export class LoginRoute {
             session.id = undefined;
             session.user = undefined;
             res.send(session);
+        });
+
+        server.postAsync("/register", async (req, res) => {
+            let username = req.body["username"];
+            let email = req.body["email"];
+            let password = req.body["password"];
+
+            if (isEmpty(username) || isEmpty(email) || isEmpty(password)) {
+                ResponseUtils.error(res, "Didn't send username, email or password");
+                return;
+            }
+
+            // TODO: Rate limiting
+
+            UserActions.createNewUser(username, email, password).catch(reason => {
+                ResponseUtils.error(res, reason);
+            }).then(() => {
+                ResponseUtils.ok(res);
+            });
         });
 
     }
