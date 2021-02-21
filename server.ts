@@ -1,4 +1,4 @@
-// Entry point of server
+// Entry point of server - Happy 100
 import * as fs from "fs";
 import {DBManager} from "./app/db/DBManager";
 import {Log} from "./app/log";
