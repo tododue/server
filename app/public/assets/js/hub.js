@@ -218,7 +218,7 @@ $(document).ready(function() {
 
 		if (closest == "div") {
 			id = $(this).parent().parent().data("assignment-id");
-			toggle = ($(this).parent().parent().data("assignment-finished") == true) ? 0 : 1;
+			toggle = ($(this).parent().parent().data("assignment-finished") == true) ? false : true;
 		} else {
 			id = $(this).closest("tr").data("assignment-id");
 			toggle = ($(this).closest("tr").data("assignment-finished") == true) ? false : true;
