@@ -5,6 +5,7 @@ import * as bearerToken from "express-bearer-token";
 import * as morgan from "morgan";
 import * as ejs from "ejs";
 import * as path from "path";
+import * as cookieParser from "cookie-parser";
 import {addAsync} from "@awaitjs/express";
 import {StaticRoute} from "./routes/staticRoute";
 import {Config} from "../config";
@@ -26,6 +27,7 @@ const server = addAsync(express());
 server.use(morgan("[MORGAN] :remote-addr :remote-user :method :url HTTP/:http-version :status :res[content-length] - :response-time ms"));
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({extended: true}));
+server.use(cookieParser());
 server.use(bearerToken());
 
 // Express variables

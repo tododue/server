@@ -58,12 +58,12 @@ $(document).ready(function() {
 					password: password
 				},
 				success: function(data) {
-					if (typeof data.msg == 'string') { defaultError.message = data.msg; notyf.error({defaultError}); }
+					if (typeof data.responseJSON["msg"] == 'string') { defaultError.message = data.responseJSON["msg"]; notyf.error(defaultError); }
 					else { window.location.href = '/hub'; }
 				},
 				error: function(data) {
-					if (typeof data.msg == 'string') { defaultError.message = data.msg; }
-					notyf.error({defaultError});
+					defaultError.message = data.responseJSON["msg"];
+					notyf.error(defaultError);
 				}
 			});
 		} else {
@@ -92,12 +92,12 @@ $(document).ready(function() {
 				password: password
 			},
 			success: function(data) {
-				if (typeof data.msg == 'string') { defaultError.message = data.msg; notyf.error({defaultError}); }
-				else { window.location.href = '/hub'; }
+					document.cookie = "token=" + data["token"];
+					window.location.href = '/hub';
 			},
 			error: function(data) {
-				if (typeof data.msg == 'string') { defaultError.message = data.msg; }
-				notyf.error({defaultError});
+				if (typeof data.responseJSON["msg"] == 'string') { defaultError.message = data.responseJSON["msg"]; }
+				notyf.error(defaultError);
 			}
 		});
 	});
