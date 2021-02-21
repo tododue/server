@@ -73,3 +73,90 @@ hr {
 .floating-button.add-button { background: #13ab06; }
 .floating-button.add-button:hover { background: #109504; }
 .floating-button.add-button:focus { background: #15790c; }
+
+table {
+    width: 100%;
+    margin: 0 auto;
+    border: 1px solid var(--theme-dark);
+    border-collapse: collapse;
+    font-family: 'PT Serif', serif;
+    font-size: 1.4rem;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+    -moz-box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+table thead {
+    font-size: 18px;
+    text-align: left;
+    border-collapse: collapse;
+    border-spacing: 0;
+    background-color: var(--theme-light);
+    color: var(--dark);
+    margin: 0;
+}
+
+table tr, table.dataTable tbody tr {
+    border: 1px solid var(--theme-2);
+    -webkit-transition: background-color .28s cubic-bezier(.4,0,.2,1);
+    -moz-transition: background-color .28s cubic-bezier(.4,0,.2,1);
+    -ms-transition: background-color .28s cubic-bezier(.4,0,.2,1);
+    -o-transition: background-color .28s cubic-bezier(.4,0,.2,1);
+    transition: background-color .28s cubic-bezier(.4,0,.2,1);
+}
+
+table td, table th, table.dataTable tbody th, table.dataTable tbody td {
+    padding: 13px;
+    border: 1px solid var(--theme-2);
+    background-color: inherit;
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+table tr.note td {
+    border-right: none;
+    border-top: none;
+}
+
+table th {
+    background-color: var(--theme-light);
+    border: 1px solid var(--theme-2);
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 3;
+}
+
+table tr>td:first-of-type {
+    z-index: 5;
+    position: sticky;
+    left: 0;
+}
+
+table tr>th:first-of-type {
+    z-index: 6;
+    position: sticky;
+    left: 0;
+    top: 0;
+}
+
+table td .icon-btn {
+    text-align: center;
+}
+
+table tbody {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+table tbody tr:nth-child(odd) {
+    background: #efefef;
+}
+
+table.dataTable tbody tr:nth-child(even), table tbody tr:nth-child(even) {
+    background: #ccc;
+}
+
+table tbody tr:hover, table.dataTable tbody tr:hover {
+    background-color: #aaa;
+}

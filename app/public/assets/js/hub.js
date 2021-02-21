@@ -2,6 +2,14 @@ if (!document.cookie.match(/token=.{32}/)) {
 	window.location.href = '/';
 }
 
+function getFormattedDate(date, justTime = false) {
+	if (justTime) {
+		return ("0" + date.getHours()).slice(-2) + ':' + ("0" + date.getMinutes()).slice(-2);
+	} else {
+		return ("0" + (date.getMonth() + 1)).slice(-2) + '-' + ("0" + date.getDate()).slice(-2) + '-' + date.getFullYear();
+	}
+}
+
 $(document).ready(function() {
 
 	let assignments;
@@ -25,30 +33,27 @@ $(document).ready(function() {
 
 	function addAssignments24h() {
 		$("#assignments").empty();
+		let div = '<table><thead><tr><th>Name</th><th>Class</th><th>Due</th><th class="text-center">Actions</th></tr></thead><tbody>';
 		for (let assignment of assignments) {
-			let div = '<div class="col-4-sm col-2-lg less-gutter"><div class="card">';
-			div    += '<h5 class="card-title">' + assignment["name"] + ' (' + assignment["class"] + ' )</h5><p class="card-content">';
-			div    += 'Due by: ' + assignment["due"] + ((typeof assignment["closes"] != 'undefined') ? ' / Closes: ' + assignment["closes"] : '');
-			div    += '<br>';
-			div    += ((assignment["complete"]) ? 'mark incomplete' : 'complete');
-			div    += '</p></div></div>';
-
-			$("#assignments").append(div);
+			div += '<tr><td>' + assignment["name"] + '</td><td>' + assignment["class"] + '</td>';
+			div += '<td>' + getFormattedDate(new Date(assignment["due"]), true) + '</td><td>' + ((assignment["close"] != assignment["due"]) ? ' / Closes: ' + getFormattedDate(new Date(assignment["close"])) : '') + '</td>';
+			div += ((assignment["note"] != null) ? '</tr><tr class="note"><td colspan="4"><strong>^^^ NOTE:</strong> ' + assignment["note"] + '</td>' : '');
+			div += '</tr>';
 		}
+		div += '</tbody></table>';
+		$("#assignments").append(div);
 	}
 
 	function addAssignmentsList() {
 		$("#assignments").empty();
+		let div = '<table><thead><tr><th>Name</th><th>Class</th><th>Due</th><th>Actions</th></tr></thead><tbody>';
 		for (let assignment of assignments) {
-			let div = '<div class="col-4-sm col-2-lg less-gutter"><div class="card">';
-			div    += '<h5 class="card-title">' + assignment["name"] + ' (' + assignment["class"] + ' )</h5><p class="card-content">';
-			div    += 'Due by: ' + assignment["due"] + ((typeof assignment["closes"] != 'undefined') ? ' / Closes: ' + assignment["closes"] : '');
-			div    += '<br>';
-			div    += ((assignment["complete"]) ? 'mark incomplete' : 'complete');
-			div    += '</p></div></div>';
-
-			$("#assignments").append(div);
+			div += '<tr><td>' + assignment["name"] + '</td><td>' + assignment["class"] + '</td>';
+			div += '<tr><td>' + assignment["due"] + '</td><td>' + ((typeof assignment["closes"] != 'undefined') ? ' / Closes: ' + assignment["closes"] : '') + '</td>';
+			div += '</tr>';
 		}
+		div += '</tbody></table>';
+		$("#assignments").append(div);
 	}
 
 	function addAssignmentsCourse() {
@@ -78,7 +83,6 @@ $(document).ready(function() {
 						addAssignments24h();
 					},
 					error: function(data) {
-						console.log(data);
 						if (typeof data["responseJSON"]["msg"] == 'string') { defaultError.message = data["responseJSON"]["msg"]; }
 						notyf.error(defaultError);
 					}
