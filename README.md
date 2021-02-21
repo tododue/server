@@ -25,7 +25,7 @@ Keeping track of up to five different websites for scheduling work, assignments,
 
 ## Features
 
-- Scrapes RIT's MyCourses for assignment data
+- Scrapes MyCourses, WebWorks, McGraw Hill, and Expert TA for assignment data
 - Displays planner in a user-friendly, readable format
 - Chrome extension shows work for the day
 
@@ -37,7 +37,9 @@ Keeping track of up to five different websites for scheduling work, assignments,
 
 ## How to Use
 
-**detailed steps once we get it worked out**
+1. Create an account at [tododue.com](https://tododue.com)
+2. Download the [extension](https://github.com/tododue/extension)
+3. Visit your MyCourses, WebWorks, McGraw Hill, or Expert TA page!
 
 ## Team
 
