@@ -6,7 +6,7 @@ export class HubRoute {
 	static route(server: ExpressWithAsync) {
 		Log.info("EXPRESS", "Registering HubRoute...");
 
-		server.postAsync("/hub*", async (req, res) => {
+		server.get("/hub", (req, res) => {
 				res.render('hub', {"username": req["user"]});
 		});
 	}

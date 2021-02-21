@@ -142,6 +142,10 @@ header img.header-logo {
 	text-align: center;
 }
 
+.hub-logo {
+	width: clamp(170px, 20vw, 270px);
+}
+
 #logo {
 	z-index: 0;
 }
