@@ -3,7 +3,7 @@
 </div>
 
 # server
-The To-Do Due Server - Hosted at tododue.com
+The To-Do Due Server - Hosted at [tododue.com](https://tododue.com)
 
 ---
 
