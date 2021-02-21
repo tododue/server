@@ -21,5 +21,13 @@ export class SessionActions {
         await DBManager.DBM.save(session);
     }
 
+    static async invalidateSession(session: Session) {
+        await DBManager.DBM.getSessions().delete({id: session.id});
+    }
+
+    static async invalidateAllSessions(user: User) {
+        await DBManager.DBM.getSessions().delete({user: user});
+    }
+
 
 }
