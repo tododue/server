@@ -5,6 +5,7 @@ import {ResponseUtils} from "../../../common/responseUtils";
 import {DBManager} from "../../../db/DBManager";
 import {User} from "../../../db/orm/user";
 import {AssignmentActions} from "../../../actions/assignmentActions";
+import {Platform} from "../../../common/platform";
 
 export class ApiAssignmentRoute {
 
@@ -49,6 +50,26 @@ export class ApiAssignmentRoute {
             ResponseUtils.ok(res);
         });
 
+        server.postAsync("/api/createCustomAssignment", async (req, res) => {
+            let user: User = req["user"];
+
+            let aClass = req.body["class"];
+            let name = req.body["name"];
+            let due = req.body["due"];
+            let close = req.body["close"];
+
+            let identifier = name;
+            let platform = Platform.CUSTOM;
+
+            if (isEmpty(aClass) || isEmpty(identifier) || isEmpty(name) || isEmpty(due)) {
+                ResponseUtils.error(res, "Class, identifier, name or due not sent");
+                return;
+            }
+
+            await AssignmentActions.createAssignment(user, aClass, platform, identifier, name, due, close);
+            ResponseUtils.ok(res);
+        });
+
         server.postAsync("/api/assignments", async (req, res) => {
             let user: User = req["user"];
 
@@ -62,7 +83,7 @@ export class ApiAssignmentRoute {
 
             let assignments = await DBManager.DBM.getAssignments().find({owner: user});
 
-            // todo: yup
+            // todo: implement filter rules
 
 
         });
