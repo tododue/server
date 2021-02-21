@@ -34,6 +34,9 @@ server.use(bearerToken());
 server.disable("x-powered-by");
 server.set('view engine', 'ejs');
 server.set('views', path.join(__dirname, "../views"));
+server.use((req, res, next) => {
+    res.header("Cache-Control", 'no-cache');
+});
 
 // Register routes
 StaticRoute.route(server);
