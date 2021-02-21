@@ -130,10 +130,12 @@ $(document).ready(function() {
 				break;
 			case "profile":
 				$.ajax({
-					url: "./api/profile",
-					type: "POST",
+					url: "./api/info",
+					type: "GET",
 					success: function(data) {
-						// assignments = data;
+						$("#assignments").empty();
+						$("#profile_name").html(data["username"]);
+						$("#profile_email").html(data["email"]);
 					},
 					error: function(data) {
 						if (typeof data["responseJSON"]["msg"] == 'string') { defaultError.message = data["responseJSON"]["msg"]; }
@@ -168,7 +170,8 @@ $(document).ready(function() {
 
 		switch (section) {
 			case "logout":
-				console.log("logout requested");
+				$.get("./api/logout");
+				window.location.href = "../";
 				break;
 			default:
 				callAPI(section);
@@ -298,6 +301,42 @@ $(document).ready(function() {
 			notyf.error({
 				"duration": 4000,
 				"message": "Please enter valid information.",
+				"dismissable": true,
+				"position": {
+					"x": "right",
+					"y": "top"
+				},
+				"ripple": false
+			});
+		}
+	});
+
+	$('#signup_btn').click(function() {
+		let username = $('#signup-modal input#username').val();
+		let email = $('#signup-modal input#email').val();
+		let password = $('#signup-modal input#password').val();
+
+		if (password == $('#signup-modal input#password_validate').val()) {
+			$.ajax({
+				type: "POST",
+				url: "register",
+				data: {
+					username: username,
+					password: password
+				},
+				success: function(data) {
+					if (typeof data["responseJSON"]["msg"] == 'string') { defaultError.message = data["responseJSON"]["msg"]; notyf.error(defaultError); }
+					else { window.location.href = '/hub'; }
+				},
+				error: function(data) {
+					defaultError.message = data["responseJSON"]["msg"];
+					notyf.error(defaultError);
+				}
+			});
+		} else {
+			notyf.error({
+				"duration": 4000,
+				"message": "Please enter the same password.",
 				"dismissable": true,
 				"position": {
 					"x": "right",
