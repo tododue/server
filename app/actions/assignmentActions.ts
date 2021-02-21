@@ -65,5 +65,20 @@ export class AssignmentActions {
         await DBManager.DBM.save(assignment);
     }
 
+    static async updateAssignment(assignment: Assignment, changes: object) {
+        let keys = Object.keys(changes);
+
+        let name = changes["name"];
+        let due = changes["due"];
+        let close = changes["close"];
+        let complete = changes["complete"];
+        let note = changes["note"];
+        let hidden = changes["hidden"];
+
+        if (keys.includes("name")) {
+
+        }
+    }
+
 
 }
