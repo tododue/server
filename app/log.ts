@@ -4,7 +4,7 @@ export class Log {
         if (message) {
             console.log(`[${title}] ${message}`);
         } else {
-            console.log(`[*] ${message}`);
+            console.log(`[*] ${title}`);
         }
     }
 
