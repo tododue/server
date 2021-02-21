@@ -94,10 +94,10 @@ export class AssignmentActions {
             assignment.overrideName = name;
         }
         if (keys.includes("due")) {
-            assignment.overrideDue = due;
+            assignment.overrideDue = new Date(due);
         }
         if (keys.includes("close")) {
-            assignment.overrideClose = close;
+            assignment.overrideClose = new Date(close);
         }
         if (keys.includes("complete")) {
             assignment.overrideComplete = complete;
@@ -126,10 +126,10 @@ export class AssignmentActions {
             assignment.name = name;
         }
         if (keys.includes("due")) {
-            assignment.due = due;
+            assignment.due = new Date(due);
         }
         if (keys.includes("close")) {
-            assignment.close = close;
+            assignment.close = new Date(close);
         }
         if (keys.includes("complete")) {
             assignment.complete = complete;
