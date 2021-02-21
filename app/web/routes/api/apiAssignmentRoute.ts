@@ -124,7 +124,7 @@ export class ApiAssignmentRoute {
                     tomorrowAssignments.push(assignment);
                 }
             });
-            tomorrowAssignments.sort((a, b) => {
+            tomorrowAssignments = tomorrowAssignments.sort((a, b) => {
                 return b.due.getMilliseconds() - a.due.getMilliseconds();
             });
 
