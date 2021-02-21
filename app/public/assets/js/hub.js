@@ -321,21 +321,19 @@ $(document).ready(function() {
 		}
 	});
 
-	$('#hide_assignment_btn').click(function() {
-		let username = $('#signup-modal input#username').val();
-		let email = $('#signup-modal input#email').val();
-		let password = $('#signup-modal input#password').val();
+	$('#reset_password_btn').click(function() {
+		let password = $('#reset-password-modal input#password').val();
+		let password_validate = $('#reset-password-modal input#password_validate').val();
 
-		if (password == $('#signup-modal input#password_validate').val()) {
+		if (password == password_validate) {
 			$.ajax({
 				type: "POST",
-				url: "register",
+				url: "./api/resetPassword",
 				data: {
-					username: username,
 					password: password
 				},
 				success: function(data) {
-					if (typeof data["responseJSON"]["msg"] == 'string') { defaultError.message = data["responseJSON"]["msg"]; notyf.error(defaultError); }
+					if (typeof data["msg"] == 'string') { defaultError.message = data["msg"]; notyf.error(defaultError); }
 					else { window.location.href = '/hub'; }
 				},
 				error: function(data) {
@@ -346,43 +344,7 @@ $(document).ready(function() {
 		} else {
 			notyf.error({
 				"duration": 4000,
-				"message": "Please enter the same password.",
-				"dismissable": true,
-				"position": {
-					"x": "right",
-					"y": "top"
-				},
-				"ripple": false
-			});
-		}
-	});
-
-	$('#signup_btn').click(function() {
-		let username = $('#signup-modal input#username').val();
-		let email = $('#signup-modal input#email').val();
-		let password = $('#signup-modal input#password').val();
-
-		if (password == $('#signup-modal input#password_validate').val()) {
-			$.ajax({
-				type: "POST",
-				url: "register",
-				data: {
-					username: username,
-					password: password
-				},
-				success: function(data) {
-					if (typeof data["responseJSON"]["msg"] == 'string') { defaultError.message = data["responseJSON"]["msg"]; notyf.error(defaultError); }
-					else { window.location.href = '/hub'; }
-				},
-				error: function(data) {
-					defaultError.message = data["responseJSON"]["msg"];
-					notyf.error(defaultError);
-				}
-			});
-		} else {
-			notyf.error({
-				"duration": 4000,
-				"message": "Please enter the same password.",
+				"message": "Please enter matching passwords.",
 				"dismissable": true,
 				"position": {
 					"x": "right",
