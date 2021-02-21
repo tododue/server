@@ -100,13 +100,13 @@ export class AssignmentActions {
             assignment.overrideClose = new Date(close);
         }
         if (keys.includes("complete")) {
-            assignment.overrideComplete = complete;
+            assignment.overrideComplete = Boolean(complete);
         }
         if (keys.includes("note")) {
-            assignment.note = note;
+            assignment.note = String(note);
         }
         if (keys.includes("hidden")) {
-            assignment.hidden = hidden;
+            assignment.hidden = Boolean(hidden);
         }
 
         await DBManager.DBM.save(assignment);
