@@ -60,6 +60,9 @@ export class ApiAssignmentRoute {
 
             let identifier = name;
             let platform = Platform.CUSTOM;
+            if (close == null) {
+                close = due;
+            }
 
             if (isEmpty(aClass) || isEmpty(identifier) || isEmpty(name) || isEmpty(due)) {
                 ResponseUtils.error(res, "Class, identifier, name or due not sent");
