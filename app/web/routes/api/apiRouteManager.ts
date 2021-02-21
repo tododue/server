@@ -14,8 +14,6 @@ export class ApiRouteManager {
         server.useAsync("/api*", async (req, res, next) => {
             let token = req["token"];
             if (isEmpty(token)) {
-                console.log(req.cookies);
-                // req.coo
                 token = req.cookies["token"];
             }
             if (isEmpty(token)) {

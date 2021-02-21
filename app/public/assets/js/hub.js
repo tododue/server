@@ -4,6 +4,8 @@ if (!document.cookie.match(/token=.{32}/)) {
 
 $(document).ready(function() {
 
+	let assignments;
+
 	var notyf = new Notyf();
 	let defaultError = {
 		"duration": 8000,
@@ -16,41 +18,81 @@ $(document).ready(function() {
 		"ripple": false
 	};
 
+	function addAssigment(assignment) {
+		assignments.push(assignment);
+		addAssignments();
+	}
+
+	function addAssignments() {
+		for (let assignment of assignments) {
+			let div = '<div class="col-4-sm col-2-lg less-gutter"><div class="card">';
+			div    += '<h5 class="card-title">' + assignment["name"] + ' (' + assignment["class"] + ' )</h5><p class="card-content">';
+			div    += 'Due by: ' + assignment["due"] + ((typeof assignment["closes"] != 'undefined') ? ' / Closes: ' + assignment["closes"] : '');
+			div    += '<br>';
+			div    += ((assignment["complete"]) ? 'mark incomplete' : 'complete');
+			div    += '</p></div></div>';
+
+			$("#assignments").append(div);
+		}
+	}
+
+	if (window.location.hash.length > 0) {
+		if ($('.li[data-link="' + window.location.hash.substr(1) + '"]').length > 0) {
+			let element = $('.li[data-link="' + window.location.hash.substr(1) + '"]');
+			element.addClass('active');
+			switch (window.location.hash.substr(1)) {
+
+			}
+		}
+	}
+
+	$(".data-link").on("click", function() {
+		$("ul.navbar li").removeClass("active");
+		let section = $(this).data("link");
+
+		$(this).parent().addClass("active");
+		window.location.hash = '#' + section;
+
+		switch (section) {
+			case "hub":
+				$("#assignments").empty();
+
+				$.ajax({
+					url: "./api/assignmentDueIn24h",
+					type: "POST",
+					success: function(e) {
+
+					},
+					error: function(e) {
+
+					}
+				});
+
+				addAssignments();
+				break;
+			case "assignments":
+				break;
+			case "courses":
+				break;
+			case "profile":
+				break;
+			case "logout":
+				break
+		}
+	});
+
 	$.ajax({
 		url: "./api/assignments",
 		type: "POST",
 		success: (e) => {
-			addAssignments(e);
+			assignments = e;
+			addAssignments();
 		},
 		error: (e) => {
 			defaultError.message = "Error reading assignments."
 			notyf.error(defaultError);
 		}
 	});
-
-	function addAssigment(e) {
-		let div = '<div class="col-4-sm col-3-lg"><div class="card">';
-		div    += '<h5 class="card-title">' + e["name"] + ' (' + e["class"] + ' )</h5><p class="card-content">';
-		div    += 'Due by: ' + e["due"] + ' / Closes: ' + e["closes"];
-		div    += '<br>';
-		div    += 'Completed ' + e["completed"];
-		div    += '</p></div></div>';
-
-		$("#assignments").append();
-	}
-
-	function addAssigments(e) {
-		for (let assignment of e) {
-			let div = '<div class="col-4-sm col-3-lg"><div class="card">';
-			div    += '<h5 class="card-title">' + assignment["name"] + ' (' + assignment["class"] + ' )</h5><p class="card-content">';
-			div    += 'Due by: ' + assignment["due"] + ' / Closes: ' + assignment["closes"];
-			div    += '<br>';
-			div    += 'Completed ' + assignment["completed"];
-			div    += '</p></div></div>';
-
-			$("#assignments").append();
-		}
-	}
 
 	$('#custom_btn').click(function() {
 		let name = $('#custom-modal input#name').val();
@@ -61,7 +103,7 @@ $(document).ready(function() {
 		if (password == $('#custom-modal input#password_validate').val()) {
 			$.ajax({
 				type: "POST",
-				url: "register",
+				url: "api/createCustomAssignment",
 				data: {
 					class: class_name,
 					name: name,
