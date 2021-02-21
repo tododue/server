@@ -29,6 +29,7 @@ export class ApiRouteManager {
 
             SessionActions.updateSession(session);
             req["user"] = session.user;
+            req["session"] = session;
             next();
         });
 
