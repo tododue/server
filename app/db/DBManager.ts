@@ -4,10 +4,13 @@ import {Log} from "../log";
 import {User} from "./orm/user";
 import {Assignment} from "./orm/assignment";
 import {Class} from "./orm/class";
+import {SqlEntity} from "./sqlEntity";
+import {validateOrReject} from "class-validator";
+import {Session} from "./orm/session";
 
-export class DbManager {
+export class DBManager {
 
-    static DBM: DbManager;
+    static DBM: DBManager;
     private sqlConnection: Connection;
 
     async init() {
@@ -18,7 +21,7 @@ export class DbManager {
             database: Config.DB_DATABASE,
             username: Config.DB_USER,
             password: Config.DB_PASSWORD,
-            entities: [User, Assignment, Class],
+            entities: [User, Assignment, Class, Session],
             synchronize: true,
             logging: Config.DEBUG_MODE
         }).catch(error => {
@@ -39,8 +42,20 @@ export class DbManager {
         return this.sqlConnection.getRepository(Assignment);
     }
 
+    getSessions() {
+        return this.sqlConnection.getRepository(Session);
+    }
+
     getClasses() {
         return this.sqlConnection.getRepository(Class);
+    }
+
+    async save(entity: SqlEntity) {
+        await validateOrReject(entity).catch((reason) => {
+            throw reason;
+        }).then(async () => {
+            await this.sqlConnection.getRepository(entity.constructor.name).save(entity);
+        });
     }
 
 

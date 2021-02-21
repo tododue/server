@@ -1,7 +1,8 @@
 import {Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 import {SqlEntity} from "../sqlEntity";
 import {User} from "./user";
-import {IsEmail, IsInstance, IsOptional, IsString} from "class-validator";
+import {IsEmail, IsEnum, IsInstance, IsOptional, IsString} from "class-validator";
+import {Platform} from "../../common/platform";
 
 @Entity({name: "classes"})
 export class Class extends SqlEntity {
@@ -17,6 +18,14 @@ export class Class extends SqlEntity {
     @Column()
     @IsString()
     identifier: string;
+
+    @Column()
+    @IsEnum(Platform)
+    platform: Platform;
+
+    @Column()
+    @IsOptional()
+    name: string;
 
     @Column()
     @IsOptional()

@@ -9,7 +9,7 @@ let configOptions = JSON.parse(configFile);
 
 export class Config {
 
-    static ROOT = path.join(process.cwd()+"/app");
+    static ROOT = path.join(process.cwd() + "/app");
 
     static DEBUG_MODE = configOptions["DEBUG_MODE"];
     static APP_ADDRESS = configOptions["APP_ADDRESS"];
@@ -19,4 +19,6 @@ export class Config {
     static DB_DATABASE = configOptions["DB_DATABASE"];
     static DB_USER = configOptions["DB_USER"];
     static DB_PASSWORD = configOptions["DB_PASSWORD"];
+
+    static SESSION_LENGTH = configOptions["SESSION_LENGTH"];
 }

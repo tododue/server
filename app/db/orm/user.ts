@@ -18,18 +18,18 @@ export class User extends SqlEntity {
 
     @Column()
     @IsString()
-    password_hash: string;
+    passwordHash: string;
 
     @Column()
     @IsString()
-    password_salt: string;
+    passwordSalt: string;
 
     @Column()
     @IsBoolean()
-    is_admin: boolean;
+    isAdmin: boolean;
 
     @Column()
     @IsBoolean()
-    is_activated: string;
+    isActivated: boolean;
 
 }
