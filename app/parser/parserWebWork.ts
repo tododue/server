@@ -58,7 +58,7 @@ export class ParserWebWork {
                 } else {
                     dateSplit[2] = dateSplit[2].replace("am", "");
                 }
-                let finalDate = dateSplit[0] + " " + dateSplit[2] + " " + dateSplit[3];
+                let finalDate = dateSplit[0] + " " + dateSplit[2];
                 assignments.push(new MicroAssignment(assignmentName, aClass, Util.convertTZ(new Date(finalDate), "America/New_York")));
             }
         });
@@ -67,7 +67,7 @@ export class ParserWebWork {
             for (const assignment of assignments) {
                 let aClass = await ClassActions.getOrCreateClass(user, assignment.class, Platform.RIT_WEBWORK);
                 let realAssignment = await AssignmentActions.getOrCreateAssignment(user, aClass, Platform.RIT_WEBWORK, assignment.name, assignment.due, assignment.due);
-                realAssignment.due = assignment.due;
+                realAssignment.d6ue = assignment.due;
                 realAssignment.close = assignment.due;
                 await DBManager.DBM.save(realAssignment);
             }
