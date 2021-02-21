@@ -27,8 +27,8 @@
         <a href="#" class="nav-brand pl-4 pr-0 px-4-lg pt-3 text-light"><img src="./assets/img/logo.png" class="hub-logo"></a>
         <nav class="navbar m-0 px-1 py-4">
             <ul class="navbar m-0 pr-3 text-center">
-                <li class="nav-link active"><a href="#hub" class="data-link" data-link="hub">hub</a></li>
-                <li class="nav-link"><a href="#assignments" class="data-link" data-link="assignments">assignment list</a></li>
+                <li class="nav-link"><a href="#hub" class="data-link" data-link="hub">hub</a></li>
+                <li class="nav-link"><a href="#assignments-list" class="data-link" data-link="assignments-list">assignment list</a></li>
                 <li class="nav-link"><a href="#courses" class="data-link" data-link="courses">grouped view</a></li>
                 <li class="nav-link"><a href="#profile" class="data-link" data-link="profile">profile</a></li>
                 <li class="nav-link"><a href="#logout" class="data-link" data-link="logout">logout</a></li>
@@ -36,35 +36,29 @@
         </nav>
     </header>
     <main class="mx-5 my-4">
-        <div id="hub" class="section container-fluid pt-5">
+        <div id="hub" class="section container-fluid">
             <div class="row">
                 <h1 class="pl-2">DUE SOON</h1>
                 <hr>
                 <div class="floating-buttons">
-                    <button class="floating-button three-dots" data-micromodal-trigger="settings-modal">
-                        <img src="./assets/img/three-dots.png">
-                    </button>
                     <button class="floating-button add-button" title="Add Custom Assignment" data-micromodal-trigger="custom-modal">
                         <img src="./assets/img/plus.png">
                     </button>
                 </div>
             </div>
         </div>
-        <div id="assignments" class="section container-fluid pt-5">
+        <div id="assignments-list" class="section container-fluid">
             <div class="row">
                 <h1 class="pl-2">AT A GLANCE - ASSIGNMENTS</h1>
                 <hr>
                 <div class="floating-buttons">
-                    <button class="floating-button three-dots" data-micromodal-trigger="settings-modal">
-                        <img src="./assets/img/three-dots.png">
-                    </button>
                     <button class="floating-button add-button" title="Add Custom Assignment" data-micromodal-trigger="custom-modal">
                         <img src="./assets/img/plus.png">
                     </button>
                 </div>
             </div>
         </div>
-        <div id="courses" class="section container-fluid pt-5">
+        <div id="courses" class="section container-fluid">
             <div class="row">
                 <h1 class="pl-2">AT A GLANCE - COURSES</h1>
                 <hr>
@@ -78,9 +72,9 @@
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div class="container-fluid pt-5">
             <div class="row">
-                <div id="assignments" class="container-fluid">
+                <div id="assignments">
                     <!-- load assignments into here -->
                 </div>
             </div>

@@ -66,11 +66,13 @@ $(document).ready(function() {
 	}
 
 	function callAPI(action) {
+		$("main > div").removeClass("active");
+		$("#" + action).addClass("active");
 		switch (action) {
 			case "hub":
 				$.ajax({
-					url: "./api/assignmentDueIn24h",
-					type: "POST",
+					url: "./api/assignmentsDueIn24h",
+					type: "GET",
 					success: function(data) {
 						assignments = data;
 						addAssignments24h();
@@ -82,7 +84,7 @@ $(document).ready(function() {
 					}
 				});
 				break;
-			case "assignments":
+			case "assignments-list":
 				$.ajax({
 					url: "./api/assignments",
 					type: "POST",
@@ -127,28 +129,30 @@ $(document).ready(function() {
 	}
 
 	if (window.location.hash.length > 0) {
-		if ($('.li[data-link="' + window.location.hash.substr(1) + '"]').length > 0) {
-			let element = $('.li[data-link="' + window.location.hash.substr(1) + '"]');
-			element.addClass('active');
+		if ($('.nav-link a[data-link="' + window.location.hash.substr(1) + '"]').length > 0) {
+			let element = $('.nav-link a[data-link="' + window.location.hash.substr(1) + '"]').parent().addClass('active');
 			switch (window.location.hash.substr(1)) {
-				case "hub", "assignments", "courses":
+				case "hub":
+				case "assignments-list":
+				case "courses":
+					callAPI(window.location.hash.substr(1));
 					break;
 			}
 		}
 	} else {
-		$("li[data-link='hub']").addClass("active");
+		$("ul.navbar li").removeClass("active");
+		$("li a[data-link='hub']").parent().addClass("active");
 		callAPI("hub");
 	}
 
-	$(".data-link").on("click", function() {
+	$(".nav-link").on("click", function() {
 		$("ul.navbar li").removeClass("active");
-		let section = $(this).data("link");
-		$(this).parent().addClass("active");
-
-		window.location.hash = '#' + section;
+		let section = $(this).children().data("link");
+		$(this).addClass("active");
 
 		switch (section) {
 			case "logout":
+				console.log("logout requested");
 				break;
 			default:
 				callAPI(section);
@@ -173,7 +177,8 @@ $(document).ready(function() {
 					close: close
 				},
 				success: function(data) {
-					addAssigment({class: class_name, name: name, due: due, close: close});
+					let action = (window.location.hash.substr(1) > 0) ? window.location.hash.substr(1) : 'hub';
+					callAPI(action);
 				},
 				error: function(data) {
 					defaultError.message = data["responseJSON"]["msg"];
