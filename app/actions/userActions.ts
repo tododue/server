@@ -22,7 +22,7 @@ export class UserActions {
         user.email = email;
         user.passwordSalt = Util.randomString(24);
         user.passwordHash = this.hashPassword(password, user.passwordSalt);
-        user.isActivated = isActivated ? isActivated : false;
+        user.isActivated = isActivated ? isActivated : true; // false
         user.isAdmin = isAdmin ? isAdmin : false;
         await DBManager.DBM.save(user);
         return user;
