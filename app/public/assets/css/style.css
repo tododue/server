@@ -333,6 +333,10 @@ footer p {
 	font-size: 22px;
 }
 
+.text-red {
+	color: #ff0000;
+}
+
 #form input:focus {
 	outline: none;
 }
@@ -363,7 +367,11 @@ footer p {
 	letter-spacing: 0.5px;
 }
 
-#form input:focus ~ label, #form input.hascontent ~ label {
+label.datetime {
+	color: #aaa !important;
+}
+
+#form input:focus ~ label, #form input ~ label.datetime, #form input.hascontent ~ label {
 	top: -16px;
 	font-size: 12px;
 	color: #0182de;
