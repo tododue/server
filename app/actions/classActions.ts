@@ -1,7 +1,7 @@
 import {Platform} from "../common/platform";
 import {User} from "../db/orm/user";
 import {Class} from "../db/orm/class";
-import {DbManager} from "../db/dbManager";
+import {DBManager} from "../db/DBManager";
 
 export class ClassActions {
 
@@ -11,7 +11,7 @@ export class ClassActions {
         aClass.identifier = identifier;
         aClass.platform = platform;
         aClass.name = name;
-        await DbManager.DBM.save(aClass);
+        await DBManager.DBM.save(aClass);
         return aClass;
     }
 
