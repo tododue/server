@@ -58,7 +58,7 @@ export class SessionRoute {
             // TODO: Rate limiting
 
             await UserActions.createNewUser(username, email, password).catch(reason => {
-                ResponseUtils.error(res, reason);
+                ResponseUtils.error(res, typeof reason == 'object' ? reason.constraints : reason);
             }).then(() => {
                 ResponseUtils.ok(res);
             });
