@@ -63,50 +63,20 @@ $breakpoint-lg: 60em; // 960px
   min-height: 0.125rem;
 }
 
+div[class^="col"] {
+  display: inline-block;
+}
+
 .row::after {
   content: "";
   display: table;
   clear: both;
 }
 
-.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
-  width: $width;
-}
-
-// what...
-.col-1-sm { width: ($width / 12) - ($gutter * 11 / 12); }
-.col-2-sm { width: ($width / 6) - ($gutter * 10 / 12); }
-.col-3-sm { width: ($width / 4) - ($gutter * 9 / 12); }
-.col-4-sm { width: ($width / 3) - ($gutter * 8 / 12); }
-.col-5-sm { width: ($width / (12 / 5)) - ($gutter * 7 / 12); }
-.col-6-sm { width: ($width / 2) - ($gutter * 6 / 12); }
-.col-7-sm { width: ($width / (12 / 7)) - ($gutter * 5 / 12); }
-.col-8-sm { width: ($width / (12 / 8)) - ($gutter * 4 / 12); }
-.col-9-sm { width: ($width / (12 / 9)) - ($gutter * 3 / 12); }
-.col-10-sm { width: ($width / (12 / 10)) - ($gutter * 2 / 12); }
-.col-11-sm { width: ($width / (12 / 11)) - ($gutter * 1 / 12); }
-.col-12-sm { width: $width; }
-
-@media only screen and (min-width: $breakpoint-md) {
-  .col-1 { width:($width / 12) - ($gutter * 11 / 12); }
-  .col-2 { width: ($width / 6) - ($gutter * 10 / 12); }
-  .col-3 { width: ($width / 4) - ($gutter * 9 / 12); }
-  .col-4 { width: ($width / 3) - ($gutter * 8 / 12); }
-  .col-5 { width: ($width / (12 / 5)) - ($gutter * 7 / 12); }
-  .col-6 { width: ($width / 2) - ($gutter * 6 / 12); }
-  .col-7 { width: ($width / (12 / 7)) - ($gutter * 5 / 12); }
-  .col-8 { width: ($width / (12 / 8)) - ($gutter * 4 / 12); }
-  .col-9 { width: ($width / (12 / 9)) - ($gutter * 3 / 12); }
-  .col-10 { width: ($width / (12 / 10)) - ($gutter * 2 / 12); }
-  .col-11 { width: ($width / (12 / 11)) - ($gutter * 1 / 12); }
-  .col-12 { width: $width; }
-
-  .hidden-sm { display: block; }
-}
-
 // =========================================================
-// Written to mimic Bootstrap padding / margin utilities
+// Written to emulate Bootstrap's grid / basic utilities
 // =========================================================
+
 $spacer: 1rem;
 $spacers: (
         0: 0,
@@ -134,7 +104,29 @@ $hiddens: (
         "-lg": $breakpoint-lg
 );
 
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
+  width: $width;
+}
+
 @each $hidden_suffix, $hidden_value in $hiddens {
+  @if $hidden_value != "" {
+    @media only screen and (min-width: $hidden_value) {
+      .col-1#{$hidden_suffix} { width: ($width / 12) - ($gutter * 11 / 12); }
+      .col-2#{$hidden_suffix} { width: ($width / 6) - ($gutter * 10 / 12); }
+      .col-3#{$hidden_suffix} { width: ($width / 4) - ($gutter * 9 / 12); }
+      .col-4#{$hidden_suffix} { width: ($width / 3) - ($gutter * 8 / 12); }
+      .col-5#{$hidden_suffix} { width: ($width / (12 / 5)) - ($gutter * 7 / 12); }
+      .col-6#{$hidden_suffix} { width: ($width / 2) - ($gutter * 6 / 12); }
+      .col-7#{$hidden_suffix} { width: ($width / (12 / 7)) - ($gutter * 5 / 12); }
+      .col-8#{$hidden_suffix} { width: ($width / (12 / 8)) - ($gutter * 4 / 12); }
+      .col-9#{$hidden_suffix} { width: ($width / (12 / 9)) - ($gutter * 3 / 12); }
+      .col-10#{$hidden_suffix} { width: ($width / (12 / 10)) - ($gutter * 2 / 12); }
+      .col-11#{$hidden_suffix} { width: ($width / (12 / 11)) - ($gutter * 1 / 12); }
+      .col-12#{$hidden_suffix} { width: $width; }
+      .hidden#{$hidden_suffix} { display: none; }
+    }
+  }
+
   @each $level, $amount in $spacers {
     @each $side_suffix, $side_value in $sides {
       @if $hidden_value != "" {
