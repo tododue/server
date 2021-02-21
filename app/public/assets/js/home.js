@@ -59,7 +59,7 @@ $(document).ready(function() {
 				},
 				success: function(data) {
 					if (typeof data["msg"] == 'string') { defaultError.message = data["msg"]; notyf.error(defaultError); }
-					else { defaultError.message = "Successfully registered! Please log in..."; }
+					else { defaultError.message = "Successfully registered! Please log in..."; notyf.success(defaultError); }
 				},
 				error: function(data) {
 					defaultError.message = data["responseJSON"]["msg"];
