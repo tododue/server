@@ -4,44 +4,16 @@ $(document).ready(function() {
 	});
 	var notyf = new Notyf();
 
-	if (window.location.search.substr(1).length > 0) {
-
-		let query = window.location.search.substr(1);
-
-		let message = {
-			"duration": 8000,
-			"message": "Error.",
-			"dismissable": true,
-			"position": {
-				"x": "right",
-				"y": "top"
-			},
-			"ripple": false
-		};
-
-		switch (query) {
-			case "success=logout":
-				message.message = "Successfully logged out!";
-				notyf.success(message);
-				break;
-			case "error=login":
-				message.message = "Error logging you in - check your username/password?";
-				notyf.error(message);
-				break;
-			case "error=signup":
-				message.message = "Make sure you have a valid username/password (more than 5 characters)!";
-				notyf.error(message);
-				break;
-			case "error=param":
-				message.message = "Dont't go messing with the parameters now...";
-				notyf.error(message);
-				break;
-			default:
-				message.message = "Something went wrong here...let someone know please!";
-				notyf.error(message);
-				break;
-		}
-	}
+	let defaultError = {
+		"duration": 8000,
+		"message": "Error.",
+		"dismissable": true,
+		"position": {
+			"x": "right",
+			"y": "top"
+		},
+		"ripple": false
+	};
 
 	$('#form input').on('change', function() {
 		if ($(this).val() !== '') { $(this).addClass('hascontent'); }
@@ -86,20 +58,12 @@ $(document).ready(function() {
 					password: password
 				},
 				success: function(data) {
-					if (typeof data == 'string' && data.includes('error=')) { window.location.href = '/?' + data; }
+					if (typeof data.msg == 'string') { defaultError.message = data.msg; notyf.error({defaultError}); }
 					else { window.location.href = '/hub'; }
 				},
 				error: function(data) {
-					notyf.error({
-						"duration": 8000,
-						"message": data["msg"],
-						"dismissable": true,
-						"position": {
-							"x": "right",
-							"y": "top"
-						},
-						"ripple": false
-					});
+					if (typeof data.msg == 'string') { defaultError.message = data.msg; }
+					notyf.error({defaultError});
 				}
 			});
 		} else {
@@ -128,20 +92,12 @@ $(document).ready(function() {
 				password: password
 			},
 			success: function(data) {
-				if (typeof data == 'string' && data.includes('error=')) { window.location.href = '/?' + data; }
+				if (typeof data.msg == 'string') { defaultError.message = data.msg; notyf.error({defaultError}); }
 				else { window.location.href = '/hub'; }
 			},
 			error: function(data) {
-				notyf.error({
-					"duration": 8000,
-					"message": data["msg"],
-					"dismissable": true,
-					"position": {
-						"x": "right",
-						"y": "top"
-					},
-					"ripple": false
-				});
+				if (typeof data.msg == 'string') { defaultError.message = data.msg; }
+				notyf.error({defaultError});
 			}
 		});
 	});
