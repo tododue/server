@@ -125,7 +125,7 @@ export class ApiAssignmentRoute {
                 }
             });
             tomorrowAssignments.sort((a, b) => {
-                return a.due.getMilliseconds() - b.due.getMilliseconds();
+                return b.due.getMilliseconds() - a.due.getMilliseconds();
             });
 
             let arr = [];
