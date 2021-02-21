@@ -36,9 +36,9 @@ export class ParserWebWork {
             i++;
             if (i == 0) {
                 let j = 0;
-                $(element).children().each(subElement => {
-                    if ($(subElement).text() == "Status") {
-                        console.log("Loop Statusrow Text: " + $(subElement).text());
+                let root = $(element).children();
+                root.each(i => {
+                    if ($(root[i]).text() == "Status") {
                         statusRow = j;
                     }
                     j++;
