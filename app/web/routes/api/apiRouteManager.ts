@@ -2,14 +2,13 @@ import {ExpressWithAsync} from "@awaitjs/express";
 import {isEmpty} from "class-validator";
 import {ResponseUtils} from "../../../common/responseUtils";
 import {DBManager} from "../../../db/DBManager";
-import {User} from "../../../db/orm/user";
 import {SessionActions} from "../../../actions/sessionActions";
 import {Log} from "../../../log";
 
-export class ApiDefaultRoute {
+export class ApiRouteManager {
 
     static route(server: ExpressWithAsync) {
-        Log.info("EXPRESS", "Registering APIDefaultRoute...");
+        Log.info("EXPRESS", "Registering ApiRouteManager...");
 
         // Check for authentication before running any API calls
         server.useAsync("/api*", async (req, res, next) => {
@@ -32,20 +31,6 @@ export class ApiDefaultRoute {
             req["user"] = session.user;
             next();
         });
-
-        // Get user information
-        server.getAsync("/api/info", async (req, res) => {
-            let user: User = await req["user"];
-            user.passwordSalt = undefined;
-            user.passwordHash = undefined;
-            user.isAdmin = undefined;
-            res.send(user);
-        });
-
-        server.postAsync("/login", async (req, res) => {
-
-        });
-
 
     }
 

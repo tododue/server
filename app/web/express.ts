@@ -8,7 +8,7 @@ import * as path from "path";
 import {addAsync} from "@awaitjs/express";
 import {StaticRoute} from "./routes/staticRoute";
 import {Config} from "../config";
-import {ApiDefaultRoute} from "./routes/api/apiDefaultRoute";
+import {ApiRouteManager} from "./routes/api/apiRouteManager";
 import {Log} from "../log";
 import {DefaultRoute} from "./routes/defaultRoute";
 import {ApiAdminRoute} from "./routes/api/apiAdminRoute";
@@ -34,7 +34,7 @@ server.set('views', path.join(__dirname, "../views"));
 // Register routes
 StaticRoute.route(server);
 
-ApiDefaultRoute.route(server);
+ApiRouteManager.route(server);
 ApiAdminRoute.route(server);
 ApiAssignmentRoute.route(server);
 ApiClassRoute.route(server);
