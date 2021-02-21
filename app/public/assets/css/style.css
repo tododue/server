@@ -23,11 +23,23 @@ h1, h2, h3, span { font-family: Rubik; font-weight: 700; }
 h4, h5 { font-family: Rubik; font-weight: 500; }
 h6, p, li { font-family: PT Serif; font-weight: 300; }
 
-.text-light { color: var(--light); }
-.text-dark { color: var(--dark); }
-.text-muted { color: var(--muted); }
-.text-theme { color: var(--theme-1); }
-.text-theme-light { color: var(--theme-light); }
+.bg-light		{ background-color: var(--light); }
+.bg-dark		{ background-color: var(--dark); }
+.bg-muted		{ background-color: var(--muted); }
+.bg-theme		{ background-color: var(--theme-1); }
+.bg-theme-light	{ background-color: var(--theme-light); }
+
+.text-light			{ color: var(--light); }
+.text-dark			{ color: var(--dark); }
+.text-muted			{ color: var(--muted); }
+.text-theme			{ color: var(--theme-1); }
+.text-theme-light	{ color: var(--theme-light); }
+
+.text-underline { text-decoration: underline; }
+
+.hidden { display: none; }
+.visible { display: block; }
+.visible-inline { display: inline-block; }
 
 /*==================/
 / Navigation
@@ -203,6 +215,7 @@ header .display {
 /*==================/
 / Main Content
 /==================*/
+
 main {
 	margin-top: -60px;
 	z-index: 1;
@@ -211,7 +224,7 @@ main {
 .card {
 	background: var(--light);
 	border-radius: 8px;
-	margin: 0 2rem;
+	margin: 0 1rem;
 	padding: 1rem 1.5rem;
 	box-shadow: 1px 4px 10px rgba(0, 0, 0, .3);
 	-webkit-transition: var(--transition);
@@ -239,4 +252,11 @@ main {
 
 .card .card-content {
 	font-size: 1rem;
+}
+
+/*==================/
+/ Footer
+/==================*/
+footer p {
+	font-family: 'Open Sans', Helvetica, sans-serif;
 }

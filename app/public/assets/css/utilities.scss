@@ -123,7 +123,9 @@ $hiddens: (
       .col-10#{$hidden_suffix} { width: ($width / (12 / 10)) - ($gutter * 2 / 12); }
       .col-11#{$hidden_suffix} { width: ($width / (12 / 11)) - ($gutter * 1 / 12); }
       .col-12#{$hidden_suffix} { width: $width; }
-      .hidden#{$hidden_suffix} { display: none; }
+      .hidden#{$hidden_suffix} { display: none !important; }
+      .visible#{$hidden_suffix} { display: block  !important; }
+      .visible-inline#{$hidden_suffix} { display: inline-block  !important; }
     }
   }
 
