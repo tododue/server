@@ -100,7 +100,14 @@ export class AssignmentActions {
             assignment.overrideClose = new Date(close);
         }
         if (keys.includes("complete")) {
-            assignment.overrideComplete = Boolean(complete);
+            console.log(complete + " type of " + typeof complete);
+            if (complete === "true") {
+                assignment.complete = false;
+                console.log("override complete false");
+            } else {
+                assignment.complete = true;
+                console.log("override complete true");
+            }
         }
         if (keys.includes("note")) {
             assignment.note = String(note);
