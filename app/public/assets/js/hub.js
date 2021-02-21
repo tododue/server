@@ -217,11 +217,11 @@ $(document).ready(function() {
 		let id, toggle;
 
 		if (closest == "div") {
-			let id = $(this).parent().parent().data("assignment-id");
-			let toggle = ($(this).parent().parent().data("assignment-finished") == true) ? 0 : 1;
+			id = $(this).parent().parent().data("assignment-id");
+			toggle = ($(this).parent().parent().data("assignment-finished") == true) ? 0 : 1;
 		} else {
-			let id = $(this).closest("tr").data("assignment-id");
-			let toggle = ($(this).closest("tr").data("assignment-finished") == true) ? 0 : 1;
+			id = $(this).closest("tr").data("assignment-id");
+			toggle = ($(this).closest("tr").data("assignment-finished") == true) ? 0 : 1;
 		}
 
 		$.ajax({
