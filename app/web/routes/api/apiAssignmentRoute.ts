@@ -118,14 +118,14 @@ export class ApiAssignmentRoute {
             let tomorrow = new Date(Date.now() + 86400000);
 
             let assignments = await DBManager.DBM.getAssignments().find({owner: user, hidden: false});
-            assignments.sort((a, b) => {
-                return a.due.getMilliseconds() - b.due.getMilliseconds();
-            });
             let tomorrowAssignments = [];
             assignments.forEach(assignment => {
                 if (assignment.due.getMilliseconds() + 86400000 > tomorrow.getMilliseconds()) {
                     tomorrowAssignments.push(assignment);
                 }
+            });
+            tomorrowAssignments.sort((a, b) => {
+                return b.due.getMilliseconds() - a.due.getMilliseconds();
             });
 
             let arr = [];
