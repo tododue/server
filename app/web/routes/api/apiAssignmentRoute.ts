@@ -5,6 +5,7 @@ import {ResponseUtils} from "../../../common/responseUtils";
 import {DBManager} from "../../../db/DBManager";
 import {User} from "../../../db/orm/user";
 import {AssignmentActions} from "../../../actions/assignmentActions";
+import {Platform} from "../../../common/platform";
 
 export class ApiAssignmentRoute {
 
@@ -15,6 +16,11 @@ export class ApiAssignmentRoute {
         server.postAsync("/api/upload", (req, res) => {
             let platform = req.body["platform"];
             let page = req.body["page"];
+
+            if (isEmpty(platform) || isEmpty(page)) {
+                ResponseUtils.error(res, "Platform or page not sent");
+                return;
+            }
 
             // parser
 
@@ -42,6 +48,64 @@ export class ApiAssignmentRoute {
 
             await AssignmentActions.updateAssignment(assignment, req.body);
             ResponseUtils.ok(res);
+        });
+
+        server.postAsync("/api/createCustomAssignment", async (req, res) => {
+            let user: User = req["user"];
+
+            let aClass = req.body["class"];
+            let name = req.body["name"];
+            let due = req.body["due"];
+            let close = req.body["close"];
+
+            let identifier = name;
+            let platform = Platform.CUSTOM;
+            if (close == null) {
+                close = due;
+            }
+
+            if (isEmpty(aClass) || isEmpty(identifier) || isEmpty(name) || isEmpty(due)) {
+                ResponseUtils.error(res, "Class, identifier, name or due not sent");
+                return;
+            }
+
+            await AssignmentActions.createAssignment(user, aClass, platform, identifier, name, due, close);
+            ResponseUtils.ok(res);
+        });
+
+        server.postAsync("/api/assignments", async (req, res) => {
+            let user: User = req["user"];
+
+            let includeHidden = req.body["includeHidden"];
+            let ignoreCompleted = req.body["hideCompleted"];
+            let ignorePast = req.body["hidePast"];
+            let startDate = req.body["startDate"];
+            let endDate = req.body["endDate"];
+            let filterClassName = req.body["filterClassName"];
+            let filterAssignmentName = req.body["filterAssignmentName"];
+
+            let assignments = await DBManager.DBM.getAssignments().find({owner: user});
+
+            // todo: implement filter rules
+
+            let arr = [];
+            assignments.forEach(assignment => {
+                let obj = {};
+                obj["id"] = assignment.id;
+                obj["name"] = assignment.overrideName ? assignment.overrideName : assignment.name;
+                obj["class"] = assignment.class.overrideName ? assignment.class.overrideName : assignment.class.name;
+                obj["complete"] = assignment.overrideComplete ? assignment.overrideComplete : assignment.complete;
+                obj["due"] = assignment.overrideDue ? assignment.overrideDue : assignment.due;
+                obj["close"] = assignment.overrideClose ? assignment.overrideClose : assignment.close;
+                obj["overrideNameSet"] = assignment.overrideName != null;
+                obj["overrideCompleteSet"] = assignment.overrideComplete != null;
+                obj["overrideDueSet"] = assignment.overrideDue != null;
+                obj["overrideCloseSet"] = assignment.overrideClose != null;
+                obj["note"] = assignment.note;
+                obj["hidden"] = assignment.hidden;
+                arr.push(obj);
+            });
+            res.send(arr);
         });
     }
 }

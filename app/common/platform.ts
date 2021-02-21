@@ -5,6 +5,6 @@ export enum Platform {
     RIT_WEBWORK = "RIT_WEBWORK",
     RIT_MYCOURSES = "RIT_MYCOURSES",
     EXPERT_TA = "EXPERT_TA",
-    MANUAL = "MANUAL"
+    CUSTOM = "CUSTOM"
 
 }
