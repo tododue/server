@@ -41,7 +41,7 @@
                 <h1 class="pl-2">DUE SOON</h1>
                 <hr>
                 <div class="floating-buttons">
-                    <button class="floating-button add-button" title="Add Custom Assignment" data-micromodal-trigger="custom-modal">
+                    <button class="floating-button add-button" title="Add Custom Assignment" data-micromodal-trigger="add-assignment-modal">
                         <img src="./assets/img/plus.png">
                     </button>
                 </div>
@@ -52,7 +52,7 @@
                 <h1 class="pl-2">AT A GLANCE - ASSIGNMENTS</h1>
                 <hr>
                 <div class="floating-buttons">
-                    <button class="floating-button add-button" title="Add Custom Assignment" data-micromodal-trigger="custom-modal">
+                    <button class="floating-button add-button" title="Add Custom Assignment" data-micromodal-trigger="add-assignment-modal">
                         <img src="./assets/img/plus.png">
                     </button>
                 </div>
@@ -66,14 +66,14 @@
                     <button class="floating-button three-dots" data-micromodal-trigger="settings-modal">
                         <img src="./assets/img/three-dots.png">
                     </button>
-                    <button class="floating-button add-button" title="Add Custom Assignment" data-micromodal-trigger="custom-modal">
+                    <button class="floating-button add-button" title="Add Custom Assignment" data-micromodal-trigger="add-assignment-modal">
                         <img src="./assets/img/plus.png">
                     </button>
                 </div>
             </div>
         </div>
-        <div class="container-fluid pt-5">
-            <div class="row">
+        <div class="container-fluid py-5">
+            <div class="row mb-5">
                 <div id="assignments">
                     <!-- load assignments into here -->
                 </div>
@@ -89,30 +89,60 @@
         </div>
     </footer>
 
-    <div id="custom-modal" class="modal micromodal-slide" aria-hidden="true">
+    <div id="edit-assignment-modal" class="modal micromodal-slide" aria-hidden="true">
         <div class="modal__overlay" tab-index="-1" data-micromodal-close>
             <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="login-modal-title">
                 <header class="modal__header">
-                    <h2 id="login-modal-title" class="modal__title">Custom Assignment</h2>
+                    <h2 id="edit-assignment-title" class="modal__title">Edit Assignment</h2>
                     <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
                 </header>
-                <main id="login-modal-content" class="modal__content">
+                <main id="edit-assignment-modal-content" class="modal__content">
                     <div id="form">
+                        <input id="assignment_id" type="hidden" value="">
                         <div>
-                            <input id="name" class="" type="text"><label for="username">Assignment Name<super class="text-red">*</super></label><span class="focus-border"></span>
+                            <input id="name" type="text"><label for="username">Assignment Name<super class="text-red">*</super></label><span class="focus-border"></span>
                         </div>
                         <div>
-                            <input id="class" class="" type="text"><label for="username">Class Name<super class="text-red">*</super></label><span class="focus-border"></span>
+                            <input id="class" type="text"><label for="username">Class Name<super class="text-red">*</super></label><span class="focus-border"></span>
                         </div>
                         <div class="mt-2">
-                            <input id="due" class="" type="datetime-local"><label class="datetime" for="username">Due Time / Close Time</label><span class="focus-border"></span>
-                            <input id="close" class="" type="datetime-local"><span class="focus-border"></span>
+                            <input id="due" type="datetime-local"><label class="datetime" for="username">Due Time / Close Time</label><span class="focus-border"></span>
+                            <input id="close" type="datetime-local"><span class="focus-border"></span>
                         </div>
                     </div>
                 </main>
                 <footer class="modal__footer">
-                    <button id="custom_btn" class="modal__btn modal__btn-primary submit" role="submit">Add Assignment</button>
-                    <button id="custom_close" class="modal__btn" data-micromodal-close>Close</button>
+                    <button id="edit_assignment_btn" class="modal__btn modal__btn-primary submit" role="submit">Save Assignment</button>
+                    <button id="edit_assignment_close" class="modal__btn" data-micromodal-close>Close</button>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <div id="add-assignment-modal" class="modal micromodal-slide" aria-hidden="true">
+        <div class="modal__overlay" tab-index="-1" data-micromodal-close>
+            <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="login-modal-title">
+                <header class="modal__header">
+                    <h2 id="add-assignment-modal-title" class="modal__title">Custom Assignment</h2>
+                    <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+                </header>
+                <main id="add-assignment-modal-content" class="modal__content">
+                    <div id="form">
+                        <div>
+                            <input id="name" type="text"><label for="username">Assignment Name<super class="text-red">*</super></label><span class="focus-border"></span>
+                        </div>
+                        <div>
+                            <input id="class" type="text"><label for="username">Class Name<super class="text-red">*</super></label><span class="focus-border"></span>
+                        </div>
+                        <div class="mt-2">
+                            <input id="due" type="datetime-local"><label class="datetime" for="username">Due Time / Close Time</label><span class="focus-border"></span>
+                            <input id="close" type="datetime-local"><span class="focus-border"></span>
+                        </div>
+                    </div>
+                </main>
+                <footer class="modal__footer">
+                    <button id="add_assignment_btn" class="modal__btn modal__btn-primary submit" role="submit">Add Assignment</button>
+                    <button id="add_assignment_close" class="modal__btn" data-micromodal-close>Close</button>
                 </footer>
             </div>
         </div>

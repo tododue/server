@@ -121,23 +121,9 @@ table tr.note td {
 table th {
     background-color: var(--theme-light);
     border: 1px solid var(--theme-2);
-    position: sticky;
     top: 0;
     left: 0;
     z-index: 3;
-}
-
-table tr>td:first-of-type {
-    z-index: 5;
-    position: sticky;
-    left: 0;
-}
-
-table tr>th:first-of-type {
-    z-index: 6;
-    position: sticky;
-    left: 0;
-    top: 0;
 }
 
 table td .icon-btn {
@@ -159,4 +145,43 @@ table.dataTable tbody tr:nth-child(even), table tbody tr:nth-child(even) {
 
 table tbody tr:hover, table.dataTable tbody tr:hover {
     background-color: #aaa;
+}
+
+td.td-actions {
+    padding-left: 2px;
+    padding-right: 2px;
+    width: 355px;
+}
+
+span.modal-edit, span.modal-finished, span.modal-unfinished {
+    margin: 0 4px;
+    padding: 5px 5%;
+    width: 36%;
+    height: 20px;
+    display: inline-block;
+    white-space: nowrap;
+    font-size: 1.1rem;
+    font-weight: 300;
+    text-align: center;
+    border: 1px solid var(--theme-2);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+span.modal-edit { background: #6495ed; }
+span.modal-edit:hover { background: #3b70d1; }
+
+span.modal-finished { background: #13ab06; }
+span.modal-finished:hover { background: #109504; }
+
+span.modal-unfinished { background: #ff4242; }
+span.modal-unfinished:hover { background: #d52121; }
+
+.actions {
+    margin-top: 25px
 }
