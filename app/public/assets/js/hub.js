@@ -247,6 +247,7 @@ $(document).ready(function() {
 		let class_name = $('#edit-assignment-modal input#class').val();
 		let due = $('#edit-assignment-modal input#due').val();
 		let close = $('#edit-assignment-modal input#close').val();
+		let note = $('#edit-assignment-modal textare#note').text();
 
 		if (name.length > 0 && class_name.length > 0) {
 			$.ajax({
