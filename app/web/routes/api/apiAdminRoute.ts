@@ -19,7 +19,22 @@ export class ApiAdminRoute {
             }
 
             next();
-        })
+        });
+
+        server.postAsync("/api/admin/createUser", async (req, res) => {
+            let username = req.body["username"];
+            let password = req.body["password"];
+            let email = req.body["email"];
+            let activated = req.body["activated"];
+
+            if (isEmpty(username) || isEmpty(password) || isEmpty(email)) {
+                ResponseUtils.error(res, "Empty username, password or email");
+                return;
+            }
+
+            await UserActions.createNewUser(username, email, password, activated);
+            ResponseUtils.ok(res);
+        });
 
         server.postAsync("/api/admin/resetPassword", async (req, res) => {
             let username = req.body["username"];
