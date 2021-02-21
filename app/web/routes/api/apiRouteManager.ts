@@ -1,3 +1,4 @@
+import * as cors from "cors";
 import {ExpressWithAsync} from "@awaitjs/express";
 import {isEmpty} from "class-validator";
 import {ResponseUtils} from "../../../common/responseUtils";
@@ -9,6 +10,9 @@ export class ApiRouteManager {
 
     static route(server: ExpressWithAsync) {
         Log.info("EXPRESS", "Registering ApiRouteManager...");
+
+        // No CORS
+        server.use("/api*", cors());
 
         // Check for authentication before running any API calls
         server.useAsync("/api*", async (req, res, next) => {
