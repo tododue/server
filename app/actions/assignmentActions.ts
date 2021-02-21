@@ -100,10 +100,10 @@ export class AssignmentActions {
             assignment.overrideClose = new Date(close);
         }
         if (keys.includes("complete")) {
-            if (complete == "true") {
+            if (complete === "true") {
                 assignment.overrideComplete = true;
             }
-            if (complete == "false") {
+            if (complete === "false") {
                 assignment.overrideComplete = false;
             }
         }
