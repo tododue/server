@@ -1,8 +1,10 @@
 :root {
 	--dark: #0f0f1f;
 	--light: #eeffff;
+	--muted: #cccccc;
 	--theme-1: #7c56dc;
 	--theme-2: #241155;
+	--theme-light: #a37fff;
 	--transition: all 250ms cubic-bezier(0.770, 0.000, 0.175, 1.000);
 	--transition-linear: all 250ms cubic-bezier(0.250, 0.250, 0.750, 0.750);
 }
@@ -23,11 +25,19 @@ h6, p, li { font-family: PT Serif; font-weight: 300; }
 
 .text-light { color: var(--light); }
 .text-dark { color: var(--dark); }
+.text-muted { color: var(--muted); }
+.text-theme { color: var(--theme-1); }
+.text-theme-light { color: var(--theme-light); }
 
 /*==================/
 / Navigation
 /==================*/
-header{ -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+header {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
 
 .nav-brand, nav.navbar {
 	display: inline-block;
@@ -120,7 +130,7 @@ header .display {
 	transform: translateX(-50%);
 	width: 25%;
 	height: 2px;
-	border-bottom: 2px solid #eeffff;
+	border-bottom: 2px solid var(--theme-2);
 	z-index: 1;
 }
 
@@ -132,7 +142,7 @@ header .display {
 	transform: translateX(-50%);
 	width: 25%;
 	height: 2px;
-	border-bottom: 2px solid #eeffff;
+	border-bottom: 2px solid var(--theme-2);
 	z-index: 1;
 }
 
@@ -142,13 +152,14 @@ header .display {
 	height: 50px;
 	top: -15px;
 	width: 100px;
+	text-shadow: 3px 3px 4px rgba(0, 0, 0, .5);
 }
 
 .animate-words {
 	position: relative;
 	display: inline-block;
 	height: 50px;
-	width: 175px;
+	width: 180px;
 }
 
 .animate-words {
@@ -157,10 +168,11 @@ header .display {
 
 .animate-words span {
 	position: absolute;
-	transform: translateY(24%);
-	font-size: 1.75rem;
+	transform: translateY(20%);
+	font-size: 1.85rem;
 	opacity: 0;
 	z-index: 0;
+	text-shadow: 3px 3px 4px rgba(0, 0, 0, .5);
 }
 
 .animate-words span {
@@ -186,4 +198,45 @@ header .display {
 	33%		{ opacity: 1; top: 0px; }
 	41%		{ opacity: 0; top: -60px; }
 	100%	{ opacity: 0; }
+}
+
+/*==================/
+/ Main Content
+/==================*/
+main {
+	margin-top: -60px;
+	z-index: 1;
+}
+
+.card {
+	background: var(--light);
+	border-radius: 8px;
+	margin: 0 2rem;
+	padding: 1rem 1.5rem;
+	box-shadow: 1px 4px 10px rgba(0, 0, 0, .3);
+	-webkit-transition: var(--transition);
+	-moz-transition: var(--transition);
+	-o-transition: var(--transition);
+	-ms-transition: var(--transition);
+}
+
+.card:hover {
+	transform: scale(1.015) translateY(-2px);
+}
+
+.card hr {
+	margin: .5rem 10%;
+	padding: 0;
+	width: 80%;
+	text-align: center;
+	border: none;
+	border-bottom: 1px solid var(--theme-1);
+}
+
+.card .card-title {
+	font-size: 1.3rem;
+}
+
+.card .card-content {
+	font-size: 1rem;
 }
