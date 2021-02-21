@@ -14,7 +14,7 @@ export class parserMyCourses {
                 let assignmentName = $($(".d2l-textblock", element)[0]).text();
                 let dueDate = $($(".d2l-textblock", element)[1]).text();
                 if (assignmentName.includes(" - Due") || assignmentName.includes(" - Availability Ends")) {
-                    console.log(assignmentName + " | Class: " + className + " | Due: " + dueDate.replace(/\n/, ""));
+
                 }
             } catch (ignored) {
             }

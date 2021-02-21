@@ -43,29 +43,29 @@ export class Assignment extends SqlEntity {
 
     @Column()
     @IsBoolean()
-    complete: boolean;
+    complete: boolean = false;
 
-    @Column()
+    @Column({nullable: true})
     @IsOptional()
     @IsString()
     overrideName: string;
 
-    @Column()
+    @Column({nullable: true})
     @IsOptional()
     @IsDate()
     overrideDue: Date;
 
-    @Column()
+    @Column({nullable: true})
     @IsOptional()
     @IsDate()
     overrideClose: Date;
 
-    @Column()
+    @Column({nullable: true})
     @IsOptional()
     @IsBoolean()
     overrideComplete: boolean;
 
-    @Column()
+    @Column({nullable: true})
     @IsOptional()
     @IsString()
     note: string;

@@ -6,6 +6,7 @@ import {DBManager} from "../../../db/DBManager";
 import {User} from "../../../db/orm/user";
 import {AssignmentActions} from "../../../actions/assignmentActions";
 import {Platform} from "../../../common/platform";
+import {ClassActions} from "../../../actions/classActions";
 
 export class ApiAssignmentRoute {
 
@@ -53,22 +54,24 @@ export class ApiAssignmentRoute {
         server.postAsync("/api/createCustomAssignment", async (req, res) => {
             let user: User = req["user"];
 
-            let aClass = req.body["class"];
+            let className = req.body["class"];
             let name = req.body["name"];
-            let due = req.body["due"];
-            let close = req.body["close"];
+            let due = new Date(req.body["due"]);
+            let closeRaw = req.body["close"];
+            let close = due;
 
             let identifier = name;
             let platform = Platform.CUSTOM;
-            if (close == null) {
-                close = due;
+            if (closeRaw != null) {
+                close = new Date(closeRaw);
             }
 
-            if (isEmpty(aClass) || isEmpty(identifier) || isEmpty(name) || isEmpty(due)) {
-                ResponseUtils.error(res, "Class, identifier, name or due not sent");
+            if (isEmpty(className) || isEmpty(name) || isEmpty(due)) {
+                ResponseUtils.error(res, "Class, name or due not sent");
                 return;
             }
 
+            let aClass = await ClassActions.getOrCreateClass(user, className);
             await AssignmentActions.createAssignment(user, aClass, platform, identifier, name, due, close);
             ResponseUtils.ok(res);
         });
@@ -106,6 +109,10 @@ export class ApiAssignmentRoute {
                 arr.push(obj);
             });
             res.send(arr);
+        });
+
+        server.getAsync("/api/assignmentsDueIn24h", async (req, res) => {
+
         });
     }
 }
