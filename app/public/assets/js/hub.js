@@ -229,7 +229,7 @@ $(document).ready(function() {
 			url: "api/updateAssignment",
 			data: {
 				id: id,
-				overrideCompleteSet: toggle
+				complete: toggle
 			},
 			success: function(data) {
 				location.reload();
