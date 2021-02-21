@@ -9,7 +9,7 @@ export class HubRoute {
 
 		server.get("/hub", (req, res) => {
 			let user: User = req["user"];
-			res.render('hub', {"user": user});
+			res.render('hub', {"user": user, "isAdmin": user.isAdmin});
 		});
 	}
 }
